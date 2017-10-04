@@ -29,7 +29,7 @@ Deployment:
         name: production
         url: $HEROKU_APP_HOST
     only:
-	- master
+        - master
 
 FunctionalTest:
     image: python:3.6

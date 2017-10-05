@@ -7,7 +7,7 @@
 ### Anggota Kelompok
 |   Nama   | NPM  |
 |----------|------|
+| Adyanissa Farsya Kirana | 1606918212 |
 | Ario Seto | 1606917670 |
 | Damar Wardoyo | 1606918080 |
-| Adyanissa Farsya Kirana | 1606918212 |
 | Wisnu Pramadhitya Ramadhan | 1606918055 |

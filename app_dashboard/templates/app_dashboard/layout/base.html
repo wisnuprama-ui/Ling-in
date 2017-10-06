@@ -1,0 +1,44 @@
+{% load staticfiles %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      {% include "app_dashboard/partials/head.html" %}
+  </head>
+  <body>
+      <header> 
+          {% include "app_dashboard/partials/header.html" %}
+      </header>
+      <content>
+              {% block content %}
+                  <!-- content goes here -->
+              {% endblock %}
+      </content>
+      <footer>
+          <!-- TODO Block Footer dan include footer.html -->
+          {% block footer %}
+          {% include "app_dashboard/partials/footer.html" %}
+          {% endblock %}
+      </footer>
+
+      <!-- Jquery n Bootstrap Script -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script type="application/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <script type="application/javascript">
+        $(function() {
+            $('a[href*="#"]:not([href="#"])').click(function() {
+              if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+                var target = $(this.hash);
+                target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+                if (target.length) {
+                  $('html, body').animate({
+                    scrollTop: target.offset().top - 55
+                  }, 1000);
+                  return false;
+                }
+              }
+            });
+          });
+      </script>
+  </body>
+</html>

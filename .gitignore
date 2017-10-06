@@ -155,6 +155,6 @@ env/
 /*/migrations/__pycache__
 /*/migrations/0*
 /db.sqlite3
-/ling_in/static/
+/static/
+/media/
 /chromedriver
-

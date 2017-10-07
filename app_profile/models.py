@@ -3,6 +3,10 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+def user_directory_img_path(instance, filename):
+    return 'image/user/{0}/profile/{1}'.format(instance.username, filename)
+
+
 class Expertise(models.Model):
     """
     Description:
@@ -46,13 +50,13 @@ class UserProfile(models.Model):
     middle_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     email = models.EmailField()
-    photo = models.ImageField(upload_to='media/images/user/', blank=True, null=True)
     birth_date = models.DateField(blank=True, null=True)
     birth_place = models.CharField(max_length=50, blank=True, null=True)
     gender = models.CharField(choices=GENDER_CHOICE, max_length=6)
     description = models.CharField(max_length=500)
+    photo = models.ImageField(upload_to=user_directory_img_path, blank=True, null=True)
 
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
 
     def __str__(self):

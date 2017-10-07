@@ -10,7 +10,7 @@ class Friend(models.Model):
     last_name = models.CharField(max_length=100)
     link = models.CharField(max_length=100)
 
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
 
     def __str__(self):
@@ -25,5 +25,5 @@ class Friendship(models.Model):
     friend = models.ForeignKey(Friend)
     user = models.ForeignKey(UserProfile)
 
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)

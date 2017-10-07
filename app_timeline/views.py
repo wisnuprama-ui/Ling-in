@@ -17,21 +17,22 @@ respones = {
 def index(request, username=None):
         model = Status
         template_name = 'app_timeline/index_timeline.html'
+        user = get_object_or_404(UserProfile, username=username)
 
         # get context
+        respones['user'] = user
         respones['status_form'] = StatusPostForm
-        respones['status_post'] = get_queryset(username)
-        respones['pagetitle'] = username
+        respones['status_post'] = get_queryset(user)
+        respones['page_title'] = 'Timeline'
         return render(request, template_name, respones)
 
-def get_queryset(username):
-    user = get_object_or_404(UserProfile, username=username)
+def get_queryset(user):
     model = Status
-    return model.objects.filter(user=user)[:10]
+    return model.objects.filter(user=user).order_by('-created_at')[:10]
 
 def add_status(request, username=None):
     """
-    create new status based on user
+    create new status based on user request
     :param request:
     :param username:
     :return:
@@ -46,7 +47,19 @@ def add_status(request, username=None):
         model(user=user, content=content).save()
         messages.success(request, "Success")
 
-        return HttpResponseRedirect('timeline/%s/status/' % (username))
+        return HttpResponseRedirect('/%s/timeline/' % (username))
 
     else:
-        return HttpResponseRedirect('timeline/%s/status/' % (username))
+        return HttpResponseRedirect('/%s/timeline/' % (username))
+
+def delete_status(request, username=None, status_id=None):
+    """
+    @TODO need to find the safe method to delete object
+    :param request:
+    :param username:
+    :param status_id:
+    :return:
+    """
+    model = Status
+    get_object_or_404(model, pk=status_id).delete()
+    return HttpResponseRedirect('/%s/status/' % (username))

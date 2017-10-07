@@ -1,22 +1,27 @@
-{% extends "app_dashboard/layout/base.html" %}
+{% extends "app_home/layout/base.html" %}
 {% load staticfiles %}
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/timeline.css' %}" />
+{% endblock %}
 {% block content %}
 <section class="input-section" id="input-section">
     <div class="container">
-        <form id="form" method="POST" action="{% url 'app_timeline:add_status' user.username %}">
-            {% if messages %}
-                <div class="messages">
-                    {% for message in messages %}
-                        <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
-                    {% endfor %}
-                </div>
-            {% endif %}
-            <h2>Update Status</h2>
-            {% csrf_token %}
-            {{ status_form }}
-            <input id="submit" type="submit" class="btn btn-lg btn-block btn-info" value="Submit">
-            <br>
-        </form>
+        <div class="card">
+            <form id="form" method="POST" action="{% url 'app_timeline:add_status' user.username %}">
+                {% if messages %}
+                    <div class="messages">
+                        {% for message in messages %}
+                            <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <h2>Update Status</h2>
+                {% csrf_token %}
+                {{ status_form }}
+                <input id="submit" type="submit" class="btn btn-lg btn-block btn-info" value="Post">
+                <br>
+            </form>
+        </div>
     </div>
 </section>
 <section class=" " id=" ">
@@ -26,7 +31,7 @@
                 {% for data in status_post %}
                     <div class="flex-item">
                         <!-- status -->
-                        <div class="card">
+                        <div class="card" id="{{ data.id }}">
                             <div class="card-block">
                                 <img class="card-img-left" src="">
                                 <a>

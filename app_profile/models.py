@@ -45,16 +45,16 @@ class UserProfile(models.Model):
     # user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
 
     # custom
-    username = models.CharField(max_length=128, blank=False, null=False, unique=True)
+    username = models.CharField(max_length=128, blank=False, unique=True)
     first_name = models.CharField(max_length=100)
     middle_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    email = models.EmailField()
+    email = models.EmailField(blank=False, unique=True)
     birth_date = models.DateField(blank=True, null=True)
-    birth_place = models.CharField(max_length=50, blank=True, null=True)
+    birth_place = models.CharField(default='',max_length=50, blank=True)
     gender = models.CharField(choices=GENDER_CHOICE, max_length=6)
-    description = models.CharField(max_length=500)
-    photo = models.ImageField(upload_to=user_directory_img_path, blank=True, null=True)
+    description = models.CharField(default='', max_length=500, blank=True)
+    photo = models.ImageField(upload_to=user_directory_img_path, null=True, blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)

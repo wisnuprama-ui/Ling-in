@@ -12,7 +12,7 @@
                 <h2 class="font-weight-bold font-italic text-center">{{ TITLE }}</h2><br>
                 <h3 class="font-weight-bold text-center">{{ message }}</h3>
                 <br>
-                <form id="form" method="POST" action="{% url 'app_home:login' %}">
+                <form id="form" method="POST" action="{% url 'app_home:account_login' %}">
                     {% if messages %}
                     <div class="messages">
                         {% for message in messages %}

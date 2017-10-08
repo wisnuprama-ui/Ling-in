@@ -18,7 +18,11 @@
                 {% endif %}
                 <div class="row">
                     <div class="col-sm-1">
+                        {% if user.photo %}
                         <img id="img" src="{{ user.photo.url }}">
+                        {% else %}
+                        <img class="img" src="{% static 'img/profile_pic.svg' %}">
+                        {% endif %}
                     </div>
                     <div class="col-sm-11">
                         {% csrf_token %}
@@ -44,7 +48,11 @@
                             <div class="status" id="{{ data.id }}">
                                 <div class="header">
                                     <div class="">
+                                        {% if data.user.photo %}
                                         <img class="display-pic" src="{{ data.user.photo.url }}">
+                                        {% else %}
+                                        <img class="display-pic" src="{% static 'img/profile_pic.svg' %}">
+                                        {% endif %}
                                     </div>
                                     <div class="">
                                     <!-- link to stats or dashboard of this username -->

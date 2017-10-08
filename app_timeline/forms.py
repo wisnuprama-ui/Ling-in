@@ -15,7 +15,7 @@ class StatusPostForm(forms.Form):
 
     status_attrs = {
         'type':'text',
-        'class':'status-form-textarea',
+        'class':'content-form-textarea',
         'placeholder':'What do you think?',
         'cols': 100,
         'rows': 4,

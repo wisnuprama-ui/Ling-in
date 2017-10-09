@@ -1,0 +1,179 @@
+html, body {
+    /* margin-top: 50px; */
+    height: 100%;
+    width: 100%;
+    margin:0;
+    padding:0;
+}
+
+.navbar-static-top {
+    margin-bottom: 19px;
+}
+
+footer {
+    margin-top: 100px;
+    position:relative;
+    bottom:0;
+    width:100%;
+    height:60px;   /* Height of the footer */
+    background:whitesmoke;
+}
+
+footer p {
+    text-align: center;
+    padding-top: 10px;
+}
+
+textarea {
+    resize:none
+}
+
+content {
+    min-height:100%;
+}
+
+section {
+    margin-top:50px;
+}
+
+.flex-center {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    height: 94%;
+    align-items: center;
+    justify-content: center;
+}
+
+.row {
+    width: auto;
+}
+
+.flex{
+    display: flex;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+    margin-right: -15px;
+    margin-left: -15px;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-item {
+    padding: 0 15px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 20%;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+h1 {
+    font-family: 'Merriweather', serif;
+    font-size: 60px;
+}
+
+h2 {
+    font-family: 'Merriweather', serif;
+}
+
+h3 {
+    font-family: 'Merriweather', serif;
+    font-weight: 500;
+}
+
+h4 {
+    font-family: 'Merriweather', serif;
+}
+
+/* The side navigation menu */
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 15; /* Stay on top */
+    top: 0;
+    right:0;
+    background-color: #111; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+/* The navigation menu links */
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover, .offcanvas a:focus{
+    color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+#button-header {
+    margin-top:5px;
+
+}
+
+.button-bottom {
+    margin-top:100px;
+    position:absolute;
+    bottom:0;
+}
+
+@media only screen and (max-width: 768px) {
+    .flex{
+        display: flex;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        align-content: flex-start;
+        margin-right: -15px;
+        margin-left: -15px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .flex-item {
+        padding: 0 15px;
+        flex-grow: 0;
+        flex-shrink: 0;
+        flex-basis: 20%;
+    }
+
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}

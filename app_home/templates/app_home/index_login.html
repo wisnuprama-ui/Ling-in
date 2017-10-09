@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    {% include "app_home/partials/head.html" %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/homepage.css' %}" />
+</head>
+<body>
+    <content>
+        <div class="flex-center">
+            <div class="flex-item" id="login-section">
+                <h2 class="font-weight-bold font-italic text-center">{{ TITLE }}</h2><br>
+                <!-- <h3 class="font-weight-bold text-center">{{ message }}</h3> -->
+                <br>
+                <form id="form" method="POST" action="{% url 'app_home:account_login' %}">
+                    {% if messages %}
+                    <div class="messages">
+                        {% for message in messages %}
+                        <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    {% csrf_token %}
+                    {{ login_form }}    
+                    <input id="submit" type="submit" class="btn btn-lg btn-block btn-info" value="Go">          
+                    </div>
+                </form>
+                <br>
+                <!-- sign up page -->
+                <a class="" href="{% url 'app_home:account' %}">Sign up?</a>
+            </div>
+        </div>
+    </content>
+</body>
+</html>

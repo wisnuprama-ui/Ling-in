@@ -13,9 +13,20 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
+from django.conf import settings
+from django.views.generic.base import RedirectView
+from django.conf.urls.static import static
+import app_timeline.urls as app_timeline
+import app_profile.urls as app_profile
+import app_home.urls as app_home
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-]
+    url(r'^', include(app_home, namespace='app_home')),
+    url(r'^', include(app_timeline, namespace='app_timeline')),
+    url(r'^', include(app_profile, namespace='app_profile')),
+    # url(r'^', RedirectView.as_view(permanent='True', url='/home/'))
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)\
+    + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

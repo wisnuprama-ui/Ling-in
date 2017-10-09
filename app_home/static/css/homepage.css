@@ -1,160 +1,63 @@
-html, body {
-    /* margin-top: 50px; */
-    height: 100%;
-    width: 100%;
+body {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(whitesmoke), to lightblue));
+    background-image: -webkit-linear-gradient(top, whitesmoke, lightblue);
+    background-image: -moz-linear-gradient(top, whitesmoke, lightblue);
+    background-image: linear-gradient(to bottom, whitesmoke, lightblue);
 }
 
-.navbar-static-top {
-    margin-bottom: 19px;
+#login-section {
+    /* background: gainsboro; */
+    padding: 10px;
 }
 
-footer {
-    height: 50px;
-    background-color: #efefef;
-}
-
-footer p {
-    text-align: center;
-    padding-top: 10px;
-}
-
-textarea {
-    resize:none
-}
-
-section {
-    margin-top:50px;
-}
-
-.flex-center {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
+#login-section form {
     display: flex;
-    padding: 0;
-    margin: 0;
-    height: 94%;
-    align-items: center;
-    justify-content: center;
-}
-
-.row {
-    width: auto;
-}
-
-.flex{
-    display: flex;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
     flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: flex-start;
-    align-content: flex-start;
-    margin-right: -15px;
-    margin-left: -15px;
-    align-items: center;
-    justify-content: center;
+    width: 300%;
 }
 
-.flex-item {
-    padding: 0 15px;
-    flex-grow: 0;
-    flex-shrink: 0;
-    flex-basis: 20%;
+#login-section form > .login-form-input {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    width: 120%;
+    box-sizing: border-box;
+    color: #2C3E50;
+    font-size: 14px;
+    margin-left:-45%;
+    box-shadow: 0 1px 2px 0.5px rgba(0, 0, 0, 0.35)
 }
 
-table, th, td {
-    border: 1px solid black;
+#login-section form > #submit {
+    margin-top:20px;
+    margin-left:4.5%;
+    width: 25%;
+    box-shadow: 0 1px 2px 0.5px rgba(0, 0, 0, 0.35)
 }
 
-.card {
-    background-color: #F8F4F4;
-    border:1px solid #AAA;
-    border-radius: 8px 8px 8px 8px;
-    font-family: 'Merriweather';
-    position: relative;
-    margin-bottom: 35px;
-    z-index: 15;
-    -webkit-box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.15);
-    -moz-box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.15);
-    -o-box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.15);
-    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.15);
-    transition: 0.3s;
-    overflow:hidden;
-}
+@media (max-width:768px) {
 
-.card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-
-.card .card-title {
-    margin:10px;
-    font-size: 20px;
-}
-
-.card .card-desc {
-    margin:10px;
-    color: #5F5F5F;
-    font-size: 16px;
-}
-
-.card .card-price {
-    margin:10px;
-    font-size: 16px;
-}
-
-.card .card-button {
-    margin:10px;
-}
-
-h1 {
-    font-family: 'Merriweather', serif;
-    font-size: 60px;
-}
-
-h2 {
-    font-family: 'Merriweather', serif;
-}
-
-h3 {
-    font-family: 'Merriweather', serif;
-    font-weight: 500;
-}
-
-@media only screen and (max-width: 768px) {
-    .flex{
+    #login-section form {
         display: flex;
-        display: -webkit-box;
-        display: -moz-box;
-        display: -ms-flexbox;
-        display: -webkit-flex;
         flex-direction: column;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        align-items: flex-start;
-        align-content: flex-start;
-        margin-right: -15px;
-        margin-left: -15px;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .flex-item{
-        padding: 0 15px;
-        flex-grow: 0;
-        flex-shrink: 0;
-        flex-basis: 100%;
-    }
-
-    .card {
         width: 100%;
     }
-
-    .card .card-img-top {
+    #login-section form > .login-form-input {
+        padding: 15px;
+        margin:0;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        margin-bottom: 10px;
         width: 100%;
+        box-sizing: border-box;
+        color: #2C3E50;
+        font-size: 14px;
+    }   
+
+    #login-section form > #submit {
+        margin-top:20px;
+        width: 100%;
+        box-shadow: 0 1px 2px 0.5px rgba(0, 0, 0, 0.35)
     }
 }

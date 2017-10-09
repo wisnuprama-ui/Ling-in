@@ -14,7 +14,6 @@ class Expertise(models.Model):
 
     """
     expertise = models.CharField(max_length=100)
-    user = models.ForeignKey(UserProfile)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, editable=False)

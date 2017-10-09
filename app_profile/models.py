@@ -46,12 +46,12 @@ class UserProfile(models.Model):
 
     # custom
     username = models.CharField(max_length=128, blank=False, unique=True)
-    first_name = models.CharField(max_length=100)
+    first_name = models.CharField(max_length=100, blank=False)
     middle_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100, blank=False)
     email = models.EmailField(blank=False, unique=True)
-    birth_date = models.DateField(blank=True, null=True)
-    birth_place = models.CharField(default='',max_length=50, blank=True)
+    birth_date = models.DateField(blank=False, null=True)
+    birth_place = models.CharField(max_length=50, blank=False)
     gender = models.CharField(choices=GENDER_CHOICE, max_length=6)
     description = models.CharField(default='', max_length=500, blank=True)
     photo = models.ImageField(upload_to=user_directory_img_path, null=True, blank=True)

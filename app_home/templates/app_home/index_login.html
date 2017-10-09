@@ -8,9 +8,9 @@
 <body>
     <content>
         <div class="flex-center">
-            <div>
+            <div class="flex-item" id="login-section">
                 <h2 class="font-weight-bold font-italic text-center">{{ TITLE }}</h2><br>
-                <h3 class="font-weight-bold text-center">{{ message }}</h3>
+                <!-- <h3 class="font-weight-bold text-center">{{ message }}</h3> -->
                 <br>
                 <form id="form" method="POST" action="{% url 'app_home:account_login' %}">
                     {% if messages %}
@@ -21,12 +21,11 @@
                     </div>
                     {% endif %}
                     {% csrf_token %}
-                    {{ login_form }}
-                    <br>
-                    <br>
-                    <input id="submit" type="submit" class="btn btn-lg btn-block btn-info" value="Go">
-                    <br>
+                    {{ login_form }}    
+                    <input id="submit" type="submit" class="btn btn-lg btn-block btn-info" value="Go">          
+                    </div>
                 </form>
+                <br>
                 <!-- sign up page -->
                 <a class="" href="{% url 'app_home:account' %}">Sign up?</a>
             </div>

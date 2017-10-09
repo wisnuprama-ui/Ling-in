@@ -1,0 +1,63 @@
+body {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(whitesmoke), to lightblue));
+    background-image: -webkit-linear-gradient(top, whitesmoke, lightblue);
+    background-image: -moz-linear-gradient(top, whitesmoke, lightblue);
+    background-image: linear-gradient(to bottom, whitesmoke, lightblue);
+}
+
+#login-section {
+    /* background: gainsboro; */
+    padding: 10px;
+}
+
+#login-section form {
+    display: flex;
+    flex-direction: column;
+    width: 300%;
+}
+
+#login-section form > .login-form-input {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    width: 120%;
+    box-sizing: border-box;
+    color: #2C3E50;
+    font-size: 14px;
+    margin-left:-45%;
+    box-shadow: 0 1px 2px 0.5px rgba(0, 0, 0, 0.35)
+}
+
+#login-section form > #submit {
+    margin-top:20px;
+    margin-left:4.5%;
+    width: 25%;
+    box-shadow: 0 1px 2px 0.5px rgba(0, 0, 0, 0.35)
+}
+
+@media (max-width:768px) {
+
+    #login-section form {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    #login-section form > .login-form-input {
+        padding: 15px;
+        margin:0;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        margin-bottom: 10px;
+        width: 100%;
+        box-sizing: border-box;
+        color: #2C3E50;
+        font-size: 14px;
+    }   
+
+    #login-section form > #submit {
+        margin-top:20px;
+        width: 100%;
+        box-shadow: 0 1px 2px 0.5px rgba(0, 0, 0, 0.35)
+    }
+}

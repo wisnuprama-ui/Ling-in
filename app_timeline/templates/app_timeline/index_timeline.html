@@ -1,0 +1,73 @@
+{% extends "app_home/layout/base.html" %}
+{% load static %}
+{% load markdown_deux_tags %}
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/timeline.css' %}" />
+{% endblock %}
+{% block content %}
+<section class="input-section" id="input-section">
+    <div class="container">
+        <div class="flex">
+            <form id="form" method="POST" action="{% url 'app_timeline:add_status' user.username %}">
+                {% if messages %}
+                    <div class="messages">
+                        {% for message in messages %}
+                            <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <div class="row">
+                    <div class="col-sm-1">
+                        {% if user.photo %}
+                        <img id="img" src="{{ user.photo.url }}">
+                        {% else %}
+                        <img class="img" src="{% static 'img/profile_pic.svg' %}">
+                        {% endif %}
+                    </div>
+                    <div class="col-sm-11">
+                        {% csrf_token %}
+                        {{ status_form }}                        
+                    </div>
+                </div>
+                <div class="button">
+                    <input id="submit" type="submit" class="btn btn-lg btn-info pull-right" value="Post">
+                </div>
+                <br>
+            </form>
+        </div>
+    </div>
+</section>
+<section class="status-stream" id="status-stream">
+    <div class="container">
+        <div class="flex">
+            <div class="stream">
+                {% if status_post %}
+                    {% for data in status_post %}
+                        <div class="flex-item">
+                            <!-- status -->
+                            <div class="status" id="{{ data.id }}">
+                                <div class="header">
+                                    <div class="">
+                                        {% if data.user.photo %}
+                                        <img class="display-pic" src="{{ data.user.photo.url }}">
+                                        {% else %}
+                                        <img class="display-pic" src="{% static 'img/profile_pic.svg' %}">
+                                        {% endif %}
+                                    </div>
+                                    <div class="">
+                                    <!-- link to stats or dashboard of this username -->
+                                        <a href="#" >
+                                            <h4 class="card-title">@{{ data.user.username }}</h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                <p>{{ data.content|markdown }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

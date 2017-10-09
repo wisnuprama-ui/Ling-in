@@ -9,27 +9,11 @@ UnitTest:
         - pip install -r requirements.txt
         - python manage.py makemigrations
         - python manage.py migrate
-        # - python manage.py collectstatic --no-input
+        - python manage.py collectstatic --no-input
     when: on_success
     script:
         - coverage run --include='app_*/*' manage.py test
         - coverage report -m
-
-Deployment:
-    image: ruby:2.4
-    stage: deploy
-    before_script:
-        - gem install dpl
-        - wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
-    script:
-        - dpl --provider=heroku --app=$HEROKU_APPNAME --api-key=$HEROKU_APIKEY
-        - export HEROKU_API_KEY=$HEROKU_APIKEY
-        - heroku run --app $HEROKU_APPNAME migrate
-    environment:
-        name: production
-        url: $HEROKU_APP_HOST
-    only:
-        - master
 
 # FunctionalTest:
 #     image: python:3.6
@@ -52,3 +36,19 @@ Deployment:
 #         - python manage.py test
 #     except:
 #         - master
+
+Deployment:
+    image: ruby:2.4
+    stage: deploy
+    before_script:
+        - gem install dpl
+        - wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
+    script:
+        - dpl --provider=heroku --app=$HEROKU_APPNAME --api-key=$HEROKU_APIKEY
+        - export HEROKU_API_KEY=$HEROKU_APIKEY
+        - heroku run --app $HEROKU_APPNAME migrate
+    environment:
+        name: production
+        url: $HEROKU_APP_HOST
+    only:
+        - master

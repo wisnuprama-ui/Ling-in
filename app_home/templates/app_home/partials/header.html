@@ -1,0 +1,14 @@
+{% load staticfiles %}
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+      <div id="mySidenav" class="sidenav">
+          <a href="{}">Dashboard</a>
+          <a href="{% url 'app_timeline:timeline_page' user.username %}">Timeline</a>
+          <a href="{% url 'app_profile:profile_page' user.username %}">Profile</a>
+          <a href="{% url 'app_timeline:timeline_page' user.username %}">Friends</a>
+          <a href="{% url 'app_home:homepage' %}" class="button-buttom">Sign out</a>
+          <a href="javascript:void(0)" class="" onclick="closeNav()">&times; Close</a>
+      </div>
+      <span id="button-header" class="pull-right" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+  </div>
+</nav>

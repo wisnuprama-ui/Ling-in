@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include(app_home, namespace='app_home')),
     url(r'^', include(app_timeline, namespace='app_timeline')),
-    # url(r'^', include(app_profile, namespace='app_profile')),
+    url(r'^', include(app_profile, namespace='app_profile')),
     # url(r'^', RedirectView.as_view(permanent='True', url='/home/'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)\
     + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

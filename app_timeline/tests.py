@@ -66,7 +66,7 @@ class AppTimelineTest(TestCase):
             model(user=self.user_profile, content=content).save()
 
         query = get_queryset(self.user_profile)
-        self.assertEqual(len(query), 10)
+        self.assertEqual(len(query), model.objects.all().count())
 
     def test_timeline_url(self):
          url = reverse('app_timeline:timeline_page', args=[self.username])
@@ -96,9 +96,9 @@ class AppTimelineTest(TestCase):
                       username=username,
                       status_id=id)
 
-        respone = Client().get('/%s/timeline/' % (username))
-        html_response = respone.content.decode('utf-8')
-        self.assertNotIn(test, html_response)
+        query = model.objects.filter(pk=id)
+        self.assertEqual(len(query), 0)
+
 
     def test_timeline_url_respone(self):
         respone = Client().get('/%s/timeline/' % (self.username))

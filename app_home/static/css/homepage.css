@@ -1,8 +1,6 @@
 body {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(whitesmoke), to lightblue));
-    background-image: -webkit-linear-gradient(top, whitesmoke, lightblue);
-    background-image: -moz-linear-gradient(top, whitesmoke, lightblue);
-    background-image: linear-gradient(to bottom, whitesmoke, lightblue);
+    height: 100%;
+    background-color: whitesmoke;
 }
 
 #login-section {
@@ -33,6 +31,17 @@ body {
     margin-top:20px;
     margin-left:4.5%;
     width: 25%;
+    box-shadow: 0 1px 2px 0.5px rgba(0, 0, 0, 0.35)
+}
+
+#signup-section form .signup-form-input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+    color: #2C3E50;
+    font-size: 14px;
     box-shadow: 0 1px 2px 0.5px rgba(0, 0, 0, 0.35)
 }
 

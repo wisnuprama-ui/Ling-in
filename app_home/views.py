@@ -72,8 +72,11 @@ def create_account(request):
             middle_name=respones['middle_name'].strip(),
             last_name=respones['last_name'].strip(),
             email=respones['email'].strip(),
-            gender=respones['gender']
+            gender=respones['gender'],
+            birth_date=respones.get('birth_date')
         )
+        user.photo = form.cleaned_data['photo']
+
         user.save()
 
         return HttpResponseRedirect('/%s/timeline/' % (user.username))

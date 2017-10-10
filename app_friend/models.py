@@ -7,7 +7,7 @@ def convertTime():
 
 class Friend(models.Model):
     name = models.CharField(max_length=100)
-    url = models.CharField(max_length=100)
+    url = models.URLField(unique=True)
 
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
@@ -15,7 +15,7 @@ class Friend(models.Model):
     def __str__(self):
         return "%s - %s" % (
             self.name,
-            self.link
+            self.url
         )
 
 class Friendship(models.Model):
@@ -24,4 +24,10 @@ class Friendship(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
+
+    def __str__(self):
+        return "%s - %s" % (
+            self.user.username,
+            self.friend.name
+        )
 

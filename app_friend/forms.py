@@ -1,14 +1,27 @@
 from django import forms
 
-class Message_Form(forms.Form):
-    error_messages = {
-        'required': 'Tolong isi input ini',
-        'invalid': 'Isi input dengan app Heroku Anda',
-    }
-    attrs = {
-        'class': 'form-control'
+class FriendForm(forms.Form):
+    error_message = {
+        'required':'This field is required'
     }
 
-    name = forms.CharField(label='Nama', required=True, max_length=27, widget=forms.TextInput(attrs=attrs))
-    url = forms.URLField(required=True, widget=forms.URLInput(attrs=attrs))
+    input_attrs = {
+        'type':'text',
+        'class':'input-form-textinput',
+        'placeholder':'Who is your friend?',
+        'cols': 100,
+        'rows': 1,
+    }
+
+    input_attrs = {
+        'type':'text',
+        'class':'input-form-textinput',
+        'placeholder':'What is your friend\'s url',
+        'cols': 100,
+        'rows': 1,
+    }
+
+
+    name = forms.CharField(label='Nama', required=True, widget=forms.TextInput(attrs=input_attrs))
+    url = forms.URLField(label='URL',required=True, widget=forms.URLInput(attrs=input_attrs))
     

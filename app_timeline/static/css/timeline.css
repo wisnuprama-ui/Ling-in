@@ -39,14 +39,31 @@
     position: relative;
     z-index: 1;
     background: white;
-    box-shadow: 0 1px 2px 0.5px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 1px 5px 0.5px rgba(0, 0, 0, 0.4);
 }
 
 #status-stream .stream .status {
     width: 100%;
     padding: 20px;
-    box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0.5px 2px 0.5px rgba(0, 0, 0, 0.5);
     box-sizing: border-box;
+    margin-top: 5px;
+    -webkit-border-radius: 0 0px 2px 2px;
+    -moz-border-radius: 0 0px 2px 2px;
+    -o-border-radius: 0 0px 2px 2px;
+    border-radius: 0 0px 2px 2px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+#status-stream .stream .status-hover:hover .status {
+    width: 100%;
+    padding: 30px;
+    box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.4);
+    box-sizing: border-box;
+    margin-top: 5px;
 }
 
 #status-stream .stream .status .header {
@@ -65,8 +82,49 @@
     word-break: break-all;
 }
 
+.stream .refresh {
+    width: 100%;
+    margin-top:25px;
+    padding: 10px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 1, 0.4);
+    box-sizing: border-box;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 18px;
+    z-index: -1;
+}
+
+.flex-item .refresh a {
+    color: lightblue;
+}
+
+.flex-item .refresh a:link {
+    text-decoration: none;
+}
+
+.flex-item .refresh a:visited {
+    text-decoration: none;
+}
+
+.flex-item .refresh a:hover {
+    text-decoration: none;
+    color: lightskyblue;
+}
+
+.status-hover .status h4 {
+    text-align: center;
+}
+
 @media only screen and (max-width: 768px) {    
     #input-section form img {
         max-width: 0;
+    }
+
+    #input-section form {
+        max-width: 90%;
+    }
+
+    #status-stream .stream {
+        max-width: 90%;
     }
 }

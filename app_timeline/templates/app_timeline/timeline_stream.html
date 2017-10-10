@@ -1,0 +1,53 @@
+{% load static %}
+{% load markdown_deux_tags %}
+<div class="infinite-container">
+        <div class="flex-item">
+            {% if status_stream %}
+            {% for data in status_stream %}
+            <!-- status -->
+            <div class="status-hover">
+                <div class="status" id="{{ data.id }}">
+                    <div class="header">
+                        <div class="">
+                            {% if data.user.photo %}
+                            <img class="display-pic" src="{{ data.user.photo.url }}">
+                            {% else %}
+                            <img class="display-pic" src="{% static 'img/profile_pic.svg' %}">
+                            {% endif %}
+                        </div>
+                        <div class="">
+                        <!-- link to stats or dashboard of this username -->
+                            <a href="#" >
+                                <h4 class="card-title">@{{ data.user.username }}</h4>
+                            </a>
+                        </div>
+                    </div>
+                    <p>{{ data.content|markdown }}</p>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="status-hover">
+                <div class="status">
+                    <h4>Hey, let's create your first post!</h4>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+{% if no_post %}
+<div class="container">
+    <div class="flex">
+        <div class="flex-item">
+            <div class="refresh">
+                {% if status_stream.has_next %}
+                <a class="infinite-more-link" href="?page={{ status_stream.next_page_number }}">More</a>
+                {% else %}
+                <a class="infinite-more-link" href="?page={{ status_stream.previous_page_number }}">Back</a>
+                {% endif %}
+                <div class="loading" style="display: none;">Loading...</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}

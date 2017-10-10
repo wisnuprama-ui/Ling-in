@@ -1,6 +1,5 @@
 {% extends "app_home/layout/base.html" %}
 {% load static %}
-{% load markdown_deux_tags %}
 {% block stylesheet %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/timeline.css' %}" />
 {% endblock %}
@@ -41,38 +40,7 @@
     <div class="container">
         <div class="flex">
             <div class="stream">
-                <div class="infinite-container">
-                        <div class="flex-item">
-                            {% for data in status_stream %}
-                            <!-- status -->
-                            <div class="status" id="{{ data.id }}">
-                                <div class="header">
-                                    <div class="">
-                                        {% if data.user.photo %}
-                                        <img class="display-pic" src="{{ data.user.photo.url }}">
-                                        {% else %}
-                                        <img class="display-pic" src="{% static 'img/profile_pic.svg' %}">
-                                        {% endif %}
-                                    </div>
-                                    <div class="">
-                                    <!-- link to stats or dashboard of this username -->
-                                        <a href="#" >
-                                            <h4 class="card-title">@{{ data.user.username }}</h4>
-                                        </a>
-                                    </div>
-                                </div>
-                                <p>{{ data.content|markdown }}</p>
-                            </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    {% if status_stream.has_next %}
-                    <a class="infinite-more-link" href="?page={{ status_stream.next_page_number }}">More</a>
-                    {% endif %}
-                    <div class="loading" style="display: none;">
-                    Loading...
-                    </div>
-                </div>
+            {% include "app_timeline/timeline_stream.html" %}
             </div>
         </div>
     </div>

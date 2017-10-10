@@ -36,6 +36,10 @@ def index(request, username=None):
     numbers_of_status = range(len(status_post))
     paginator = Paginator(status_post, 10)
 
+    no_post = True
+    if(len(status_post) <= 1):
+        no_post = False
+
     try:
         status_stream = paginator.page(page)
     except PageNotAnInteger:
@@ -43,6 +47,7 @@ def index(request, username=None):
     except EmptyPage:
         status_stream = paginator.page(paginator.num_pages)
 
+    respones['no_post'] = no_post
     respones['status_stream'] = status_stream
     return render(request, template_name, respones)
 

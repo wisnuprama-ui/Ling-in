@@ -3,7 +3,7 @@
   <div class="container">
       <div class="navbar-brand">Ling-In</div>
       <div id="sidenav" class="sidenav">
-          <a href="{}">Dashboard</a>
+          <a href="{% url 'app_dashboard:stats' user.username %}">Dashboard</a>
           <a href="{% url 'app_timeline:timeline_page' user.username %}">Timeline</a>
           <a href="{% url 'app_profile:profile_page' user.username %}">Profile</a>
           <a href="{% url 'app_friend:index' user.username %}">Friends</a>

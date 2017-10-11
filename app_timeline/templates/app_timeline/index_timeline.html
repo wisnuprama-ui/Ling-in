@@ -55,14 +55,14 @@
     function growStatusForm() {
         clicked = true;
         $('#input-section form').css('height','auto');$('#input-section form .submit-button').css('display','block');
-        $('#input-section form .status-form-textarea').css('max-height','100%');
+        $('#input-section form .status-form-textarea').animate({'max-height':'100%','border-radius':'1rem'});
         if(minSc.matches){$('#input-section form img').css({'max-width':'75px', 'max-height':'75px'})}
     }
     $(document).scroll(function minimizeStatusForm(){
         if($(this).scrollTop() > 100){
             $('#input-section form').css('height', '100px');
             $('#input-section form .submit-button').css('display', 'none');
-            $('#input-section form .status-form-textarea').css('max-height', '50px');
+            $('#input-section form .status-form-textarea').css({'max-height':'50px', 'border-radius':'2rem'});
             if(minSc.matches){
             $('#input-section form img').css({'max-width':'50px','max-height':'50px'});
             }
@@ -74,7 +74,7 @@
     function calculateChar() {
         var input_form = document.getElementById('status-form-textarea').value;
         var value_length = input_form.length + 1;
-        document.getElementById('cal_char').innerHTML = 200 - value_length;
+        document.getElementById('cal_char').innerHTML = 201 - value_length;
     }  
 </script>
 {% endblock %}

@@ -1,0 +1,121 @@
+#stats-stream .stream {
+    width: 100%;
+    margin: 50px auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    position: relative;
+    z-index: 1;
+    background: white;
+    box-shadow: 0 1px 5px 0.5px rgba(0, 0, 0, 0.4);
+}
+
+#stats-stream .stream .stats {
+    width: 100%;
+    padding: 20px;
+    box-shadow: 0 0.5px 2px 0.5px rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    margin-top: 5px;
+    -webkit-border-radius: 0 0px 2px 2px;
+    -moz-border-radius: 0 0px 2px 2px;
+    -o-border-radius: 0 0px 2px 2px;
+    border-radius: 0 0px 2px 2px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+#stats-stream .stream .stats-hover:hover .stats {
+    width: 100%;
+    padding: 30px;
+    box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.4);
+    box-sizing: border-box;
+    margin-top: 5px;
+}
+
+#stats-stream .stream .stats .statistic {
+    display: flex;
+    padding: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+#stats-stream .stream .stats p {
+    font-size: 1.7rem;
+    margin:3rem;
+    margin-bottom:0;
+    margin-top:0;
+}
+
+#stats-stream .stream .stats p b {
+    font-size: 1.7rem;
+    margin:20px;
+    margin-bottom:0;
+    margin-top:0;
+}
+
+#stats-stream .stream .stats .display-pic {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    margin: 0px;
+}
+
+#stats-stream .stream .stats #status-date {
+    color: lightgrey;
+}
+
+#stats-stream .stream .stats .delete-button {
+    position: relative;
+    width: 0px;
+    margin-right: 0px;
+    padding-bottom: 10px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+#stats-stream .stream .stats:hover .delete-button {
+    width: 30px;
+}
+
+#stats-stream .stream .stats p {
+    white-space: normal;
+    word-break: break-all;
+}
+
+@media only screen and (max-width: 768px) {    
+    
+    #stats-stream .stream .stats {
+        width: 100%;
+        padding: 10px;
+    }
+
+    #stats-stream .stream .stats .display-pic {
+        width: 100px;
+        height: 100px;
+    }
+
+    #stats-stream .stream {
+        max-width: 90%;
+    }
+
+    #stats-stream .stream .stats .statistic {
+        display: flex;
+        padding: 10px;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+    
+    #stats-stream .stream .stats p {
+        font-size: 1.4rem;
+        margin:0;
+    }
+    
+    #stats-stream .stream .stats p b {
+        font-size: 1.4rem;
+        margin:30px;
+    }
+}

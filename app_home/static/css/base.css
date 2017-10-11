@@ -8,7 +8,7 @@ body {
     margin:0;
     margin-bottom: 60px;
     padding:0;
-    padding-bottom: 75px;
+    padding-bottom: 55px;
     background-color: #F3F2F2;
 }
 
@@ -17,7 +17,6 @@ body {
 }
 
 .footer {
-    margin-top: 50px;
     position: absolute;
     bottom: 0;
     width: 100%;

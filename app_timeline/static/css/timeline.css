@@ -21,7 +21,7 @@
 #input-section form .status-form-textarea {
     padding: 15px;
     border: 1px solid #ccc;
-    border-radius: 3px;
+    border-radius: 2rem;
     margin-bottom: 10px;
     width: 100%;
     box-sizing: border-box;
@@ -101,6 +101,10 @@
     margin-right: 10px;
 }
 
+#stats-stream .stream .status .status-date {
+    color: lightgrey;
+}
+
 #status-stream .stream .status .delete-button {
     position: relative;
     width: 0px;
@@ -115,6 +119,10 @@
 
 #status-stream .stream .status:hover .delete-button {
     width: 30px;
+}
+
+#status-stream .stream .status:hover .delete-button::selection {
+    
 }
 
 #status-stream .stream .status p {

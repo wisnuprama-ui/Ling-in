@@ -21,10 +21,12 @@ class StatusPostForm(forms.Form):
         'max-length':200,
         'cols': 100,
         'rows': 4,
-        'oninput': 'calculateChar()'
+        'onkeydown': 'calculateChar()',
+        'onpaste': 'calculateChar()',
     }
 
     content = forms.CharField(label='',
+                              max_length=200,
                               required=True,
                               widget=forms.Textarea(attrs=status_attrs))
 

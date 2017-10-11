@@ -72,9 +72,9 @@
     })
 
     function calculateChar() {
-        
-        var el = $('#input-section form .status-form-textarea')
-        document.getElementById('cal_char').value = el.length
+        var input_form = document.getElementById('status-form-textarea').value;
+        var value_length = input_form.length + 1;
+        document.getElementById('cal_char').innerHTML = 200 - value_length;
     }  
 </script>
 {% endblock %}

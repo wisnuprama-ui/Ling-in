@@ -24,6 +24,11 @@
                     </div>
                     <p><b>{{data.created_at}}</b><p/>
                     <p>{{ data.content|markdown }}</p>
+                    <div class="pull-right">
+                        <a id="data-{{ data.id }}" href="{% url 'app_timeline:delete_status' data.user.username data.id %}" >
+                            <img class="delete-button" src="{% static 'img/delete.svg' %}">
+                        </a>
+                    </div>
                 </div>
             </div>
             {% endfor %}

@@ -97,4 +97,4 @@ def delete_status(request, username=None, status_id=None):
 
     user = get_object_or_404(UserProfile, username=username)
     get_object_or_404(model, pk=status_id).delete()
-    return HttpResponseRedirect('/%s/status/' % (user.username))
+    return HttpResponseRedirect('/%s/timeline/' % (user.username))

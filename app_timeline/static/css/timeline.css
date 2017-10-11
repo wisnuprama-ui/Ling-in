@@ -96,9 +96,25 @@
 }
 
 #status-stream .stream .status .display-pic {
-    border-radius: 5%;
+    border-radius: 10%;
     width: 35px;
     margin-right: 10px;
+}
+
+#status-stream .stream .status .delete-button {
+    position: relative;
+    width: 0px;
+    margin-right: 0px;
+    padding-bottom: 10px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+#status-stream .stream .status:hover .delete-button {
+    width: 30px;
 }
 
 #status-stream .stream .status p {

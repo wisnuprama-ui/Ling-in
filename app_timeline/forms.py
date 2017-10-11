@@ -15,10 +15,13 @@ class StatusPostForm(forms.Form):
 
     status_attrs = {
         'type':'text',
-        'class':'content-form-textarea',
+        'class':'status-form-textarea',
         'placeholder':'What do you think?',
+        'id':'status-form-textarea',
+        'max-length':200,
         'cols': 100,
         'rows': 4,
+        'oninput': 'calculateChar()'
     }
 
     content = forms.CharField(label='',

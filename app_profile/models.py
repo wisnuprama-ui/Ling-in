@@ -54,7 +54,7 @@ class UserProfile(models.Model):
     birth_place = models.CharField(max_length=50, blank=False)
     gender = models.CharField(choices=GENDER_CHOICE, max_length=6)
     description = models.CharField(default='', max_length=500, blank=True)
-    photo = models.ImageField(upload_to=user_directory_img_path, null=True, blank=True)
+    photo = models.ImageField(default='img/profile_pic.svg',upload_to=user_directory_img_path, null=True, blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)

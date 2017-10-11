@@ -37,7 +37,7 @@ def index(request, username=None):
     paginator = Paginator(status_post, 10)
 
     no_post = True
-    if(len(status_post) <= 1):
+    if(len(status_post) <= 2):
         no_post = False
 
     try:
@@ -46,6 +46,7 @@ def index(request, username=None):
         status_stream = paginator.page(1)
     except EmptyPage:
         status_stream = paginator.page(paginator.num_pages)
+
 
     respones['no_post'] = no_post
     respones['status_stream'] = status_stream
@@ -76,7 +77,7 @@ def add_status(request, username=None):
         content = request.POST['content']
         # create status
         model(user=user, content=content).save()
-        messages.success(request, "Success")
+        # messages.success(request, "Success")
 
         return HttpResponseRedirect('/%s/timeline/' % (username))
 

@@ -12,6 +12,7 @@ def index(request, username=None):
     user=get_object_or_404(UserProfile,username=username)
     response['friends'] = get_query_friends(user)
     response['friend_form'] = FriendForm
+    response['user'] = user
     return render(request, html, response)
 
 def get_query_friends(user):
@@ -30,9 +31,8 @@ def new_friend(request, username=None):
     form = FriendForm(request.POST or None)
     if(request.method == 'POST' and form.is_valid()):
         friend_name = request.POST['name']
-        friend_url = request.POST['url'] 
-        # message = Message(name=response['name'], url=response['url'])
-        # message.save()
+        friend_url = request.POST['url']
+
         friend=Friend(name=friend_name, url=friend_url)
         friend.save()
 

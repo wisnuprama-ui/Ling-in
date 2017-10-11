@@ -17,7 +17,7 @@
                         </div>
                         <div class="">
                         <!-- link to stats or dashboard of this username -->
-                            <a href="#" >
+                            <a href="/{{ data.user.username }}/" >
                                 <h4 class="card-title">@{{ data.user.username }}</h4>
                             </a>
                         </div>
@@ -45,7 +45,6 @@
                 {% else %}
                 <a class="infinite-more-link" href="?page={{ status_stream.previous_page_number }}">Back</a>
                 {% endif %}
-                <div class="loading" style="display: none;">Loading...</div>
             </div>
         </div>
     </div>

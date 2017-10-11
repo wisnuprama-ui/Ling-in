@@ -1,6 +1,6 @@
 {% load static %}
 
-<form id="form" method="POST" action="{% url 'app_friend:add-friend' user.username %}">
+<form id="form" method="POST" action="{% url 'app_friend:addfriend' user.username %}">
                 {% if messages %}
                     <div class="messages">
                         {% for message in messages %}
@@ -26,9 +26,8 @@
                 </div>
                 <br>
 
-
-
 {% for f in friends %}
-{{ f.name }}
-{{ f.url }}
+    {{ f.name }}
+    {{ f.url }}
+    {{ f.created_at }}
 {% endfor %}

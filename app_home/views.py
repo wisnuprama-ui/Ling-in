@@ -14,7 +14,7 @@ respones = {
 def index(request):
     template_name = 'app_home/index_login.html'
 
-    respones['page_title'] = 'Home / Login'
+    respones['page_title'] = 'Home'
     respones['login_form'] = LoginForm
     respones['message'] = 'Username'
 

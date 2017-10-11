@@ -7,21 +7,28 @@ class FriendForm(forms.Form):
 
     input_attrs = {
         'type':'text',
-        'class':'input-form-textinput',
+        'class':'input-form-name',
+        'id':'input-form-name',
         'placeholder':'Who is your friend?',
         'cols': 100,
         'rows': 1,
     }
 
-    input_attrs = {
+    url_attrs = {
         'type':'text',
         'class':'input-form-textinput',
+        'id':'input-form-url',
         'placeholder':'What is your friend\'s url',
         'cols': 100,
         'rows': 1,
     }
 
 
-    name = forms.CharField(label='Nama', required=True, widget=forms.TextInput(attrs=input_attrs))
-    url = forms.URLField(label='URL',required=True, widget=forms.URLInput(attrs=input_attrs))
+    name = forms.CharField(label='Nama', required=True,
+                           widget=forms.TextInput(attrs=input_attrs),
+                           error_messages=error_message)
+
+    url = forms.URLField(label='URL',required=True,
+                         widget=forms.URLInput(attrs=url_attrs),
+                         error_messages=error_message)
     

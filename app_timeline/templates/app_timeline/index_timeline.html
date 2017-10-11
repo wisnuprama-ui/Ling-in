@@ -5,9 +5,10 @@
 {% endblock %}
 {% block content %}
 <section class="input-section" id="input-section">
-    <div class="container">
+    <div class="container" onscroll="minimizeStatusForm()">
         <div class="flex">
-            <form id="form" method="POST" action="{% url 'app_timeline:add_status' user.username %}">
+            <form id="form" method="POST" action="{% url 'app_timeline:add_status' user.username %}"
+            onclick="growStatusForm()">
                 {% if messages %}
                     <div class="messages">
                         {% for message in messages %}
@@ -28,8 +29,9 @@
                         {{ status_form }}                        
                     </div>
                 </div>
-                <div class="button">
-                    <input id="submit" type="submit" class="btn btn-lg btn-info pull-right" value="Post">
+                <div class="pull-right submit-button">
+                    <span id="cal_char">200</span>
+                    <input id="submit" type="submit" class="btn btn-lg btn-info" value="Post">
                 </div>
                 <br>
             </form>
@@ -45,15 +47,35 @@
         </div>
     </div>
 </section>
-<script>
-    var infinite = new Waypoint.Infinite({
-      element: $('.infinite-container')[0],
-      onBeforePageLoad: function () {
-        $('.loading').show();
-      },
-      onAfterPageLoad: function ($items) {
-        $('.loading').hide();
-      }
-    });
+{% endblock %}
+{% block script %}
+<script type="application/javascript">
+    const minSc = window.matchMedia( "(min-width: 768px)");
+    var clicked = false;
+    function growStatusForm() {
+        clicked = true;
+        $('#input-section form').css('height','auto');$('#input-section form .submit-button').css('display','block');
+        $('#input-section form .status-form-textarea').css('max-height','100%');
+        if(minSc.matches){$('#input-section form img').css({'max-width':'75px', 'max-height':'75px'})}
+    }
+    $(document).scroll(function minimizeStatusForm(){
+        if($(this).scrollTop() > 100){
+            $('#input-section form').css('height', '100px');
+            $('#input-section form .submit-button').css('display', 'none');
+            $('#input-section form .status-form-textarea').css('max-height', '50px');
+            if(minSc.matches){
+            $('#input-section form img').css({'max-width':'50px','max-height':'50px'});
+            }
+        } //else if (clicked) {
+        //     growStatusForm()
+        // }
+    })
+
+    function calculateChar() {
+        
+        var el = $('#input-section form .status-form-textarea')
+        document.getElementById('cal_char').value = el.length
+    }
+    
 </script>
 {% endblock %}

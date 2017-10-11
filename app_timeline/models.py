@@ -21,3 +21,8 @@ class Status(models.Model):
 
     class Meta:
         ordering = ('created_at', 'updated_at')
+
+#
+# class Comment(models.Model):
+#
+#     user = models.ForeignKey

@@ -11,9 +11,14 @@
     padding: 10px 10px;
     box-sizing: border-box;
     position: relative;
+    height: 100px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
 }
 
-#input-section form .content-form-textarea {
+#input-section form .status-form-textarea {
     padding: 15px;
     border: 1px solid #ccc;
     border-radius: 3px;
@@ -22,13 +27,32 @@
     box-sizing: border-box;
     color: #2C3E50;
     font-size: 14px;
+    max-height: 50px;
+    overflow: hidden;
+    -webkit-transition: height .3s ease-out;
+    -moz-transition: height .3s ease-out;
+    -o-transition: height .3s ease-out;
+    transition: height .3s ease-out;
+}
+
+#input-section form .submit-button {
+    display:none;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 #input-section form img {
     border-radius: 50%;
-    max-width: 75px;
+    max-width: 50px;
+    max-height: 50px;
     margin-left: 10px;
-    margin-top: 15px;
+    margin-top: 0px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 #status-stream .stream {
@@ -122,7 +146,14 @@
 
     #input-section form {
         max-width: 90%;
+        padding-top:0px;
     }
+
+    #input-section form .status-form-textarea {
+        max-height: 45px;
+    }
+
+
 
     #status-stream .stream {
         max-width: 90%;

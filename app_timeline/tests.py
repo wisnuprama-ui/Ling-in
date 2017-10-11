@@ -6,6 +6,10 @@ from .models import Status
 from .views import index, add_status, delete_status, get_queryset
 from .forms import StatusPostForm
 import app_profile.models as app_profile_models
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.options import Options
+from selenium.common.exceptions import ErrorInResponseException
 
 # Create your tests here.
 
@@ -148,3 +152,66 @@ class AppTimelineTest(TestCase):
         response = Client().get('/%s/timeline/')
         html_response = response.content.decode('utf8')
         self.assertNotIn(test, html_response)
+
+def AppTimelineFunctional(TestCase):
+
+    username = 'anon'
+    user_profile = None
+    selenium = None
+
+    def setUp(self):
+        self.username = 'anon'
+        self.user_profile = app_profile_models.UserProfile(
+            username=self.username,
+            first_name=self.username,
+            middle_name=self.username,
+            last_name=self.username,
+            email=self.username + '@' + self.username + '.com',
+            birth_date=timezone.now(),
+            birth_place=self.username,
+            gender=app_profile_models.UserProfile.MALE,
+            description=self.username + self.username + self.username
+        );
+        self.user_profile.save()  # save
+
+        chrome_options = Options()
+        chrome_options.add_argument('--dns-prefetch-disable')
+        chrome_options.add_argument('--no-sandbox')
+        chrome_options.add_argument('--headless')
+        chrome_options.add_argument('disable-gpu')
+        self.selenium = webdriver.Chrome('./chromedriver', chrome_options=chrome_options)
+
+        super(AppTimelineTest, self).setUp()
+
+    def tearDown(self):
+        self.selenium.quit()
+        super(AppTimelineFunctional, self).tearDown()
+
+    def test_timeline_input_status(self):
+        selenium = self.selenium
+        # Opening the link we want to test
+        selenium.get('http://127.0.0.1:8000/%s/timeline/' % (self.user_profile.username))
+        isi_status = 'ini statusku, kalo kamu?'
+
+        status = selenium.find_element_by_id('status-form-textarea')
+        submit = selenium.find_element_by_id('submit')
+        status.send_keys(isi_status)
+
+        # submit
+        submit.send_keys(Keys.RETURN)
+
+        # check the returned result
+        self.assertIn(isi_status, selenium.page_source)
+
+    # def test_delete_todo(self):
+    #     selenium = self.selenium
+    #     DATA = "data-"
+    #     title = 'delete via selenium'
+    #
+    #     todo = Todo.objects.create(title=title, description='test 123 di delete')
+    #     obj_id = todo.id
+    #
+    #     selenium.get('http://127.0.0.1:8000/lab-5/')
+    #     delete = selenium.find_element_by_id(DATA + str(obj_id))
+    #     delete.send_keys(Keys.RETURN)
+    #     self.assertNotIn(title, selenium.page_source)

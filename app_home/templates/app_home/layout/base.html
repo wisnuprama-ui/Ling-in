@@ -35,6 +35,9 @@
       <script type="application/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
       <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
       <script src="{% static 'js/infinite.min.js' %}"></script>
+      {% block script %}
+            <!-- javascript here -->
+      {% endblock %}
       <script type="application/javascript">
         $(function() {
             $('a[href*="#"]:not([href="#"])').click(function() {

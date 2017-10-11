@@ -10,7 +10,7 @@ from .forms import StatusPostForm
 
 # Create your views here.
 
-respones = {
+response = {
     'TITLE': strings.TITLE,
     'YEAR': strings.YEAR,
 }
@@ -27,9 +27,9 @@ def index(request, username=None):
     user = get_object_or_404(UserProfile, username=username)
 
     # get context
-    respones['user'] = user
-    respones['status_form'] = StatusPostForm
-    respones['page_title'] = 'Timeline'
+    response['user'] = user
+    response['status_form'] = StatusPostForm
+    response['page_title'] = 'Timeline'
 
     status_post = get_queryset(user)
     page = request.GET.get('page', 1)
@@ -48,9 +48,9 @@ def index(request, username=None):
         status_stream = paginator.page(paginator.num_pages)
 
 
-    respones['no_post'] = no_post
-    respones['status_stream'] = status_stream
-    return render(request, template_name, respones)
+    response['no_post'] = no_post
+    response['status_stream'] = status_stream
+    return render(request, template_name, response)
 
 def get_queryset(user):
     """

@@ -4,6 +4,7 @@ from django.contrib import messages
 from ling_in.strings import TITLE, YEAR
 from .forms import LoginForm, SignUpForm
 from app_profile.models import UserProfile
+from datetime import datetime
 
 # Create your views here.
 respones = {
@@ -42,13 +43,13 @@ def login_account(request):
 
         if(len(search) != 1):
             messages.error(request, 'Username does not exist')
-            return HttpResponseRedirect('/home/')
+            return HttpResponseRedirect('/')
 
         user = search[0]
         return HttpResponseRedirect('/%s/timeline/' % (user.username))
 
     else:
-        return HttpResponseRedirect('/home/')
+        return HttpResponseRedirect('/')
 
 
 def create_account(request):
@@ -62,10 +63,13 @@ def create_account(request):
 
         if (len(search) > 0):
             messages.error(request, 'Username not available')
-            return HttpResponseRedirect('/home/account/')
+            return HttpResponseRedirect('/account/')
 
         respones = request.POST
 
+        birthdate = datetime.today().date()
+        print(respones.get('birth_date'))
+        print(type(respones['birth_date']))
         user = model(
             username=username,
             first_name=respones['first_name'].strip(),
@@ -73,13 +77,12 @@ def create_account(request):
             last_name=respones['last_name'].strip(),
             email=respones['email'].strip(),
             gender=respones['gender'],
-            birth_date=respones.get('birth_date')
+            birth_date=birthdate
         )
         user.photo = form.cleaned_data['photo']
-
         user.save()
 
         return HttpResponseRedirect('/%s/timeline/' % (user.username))
 
     else:
-        return HttpResponseRedirect('/home/account/')
+        return HttpResponseRedirect('/account/')

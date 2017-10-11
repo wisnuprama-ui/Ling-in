@@ -45,6 +45,17 @@ body {
     box-shadow: 0 1px 2px 0.5px rgba(0, 0, 0, 0.35)
 }
 
+#signup-section form .signup-form-date {
+    padding: 0px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+    color: #2C3E50;
+    font-size: 14px;
+    box-shadow: 0 1px 2px 0.5px rgba(0, 0, 0, 0.35)
+}
+
 @media (max-width:768px) {
 
     #login-section form {

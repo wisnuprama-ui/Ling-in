@@ -56,6 +56,10 @@ class SignUpForm(forms.Form):
     username = forms.CharField(label='Username*',
                                required=True,
                                widget=forms.TextInput(attrs=input_attrs))
+    
+    photo = forms.ImageField(label='Photo',
+                            required=False,
+                            widget=forms.ClearableFileInput(photo_attrs))
 
     first_name = forms.CharField(label='First Name*',
                                  required=True,
@@ -73,20 +77,10 @@ class SignUpForm(forms.Form):
                             required=True,
                             widget=forms.EmailInput(attrs=input_attrs))
 
-    birth_date = forms.DateField(label='Birth Date*',
-                                required=True,
-                                widget=forms.SelectDateWidget(
-                                    date_attrs
-                                ))
-
     gender = forms.ChoiceField(label='Gender*',
                              required=True,
                              choices=UserProfile.GENDER_CHOICE,
                              widget=forms.Select(input_attrs))
-
-    photo = forms.ImageField(label='Photo',
-                            required=False,
-                            widget=forms.ClearableFileInput(photo_attrs))
 
     class Meta:
         model = UserProfile

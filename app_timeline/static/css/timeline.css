@@ -97,7 +97,7 @@
 
 #status-stream .stream .status .display-pic {
     border-radius: 5%;
-    max-width: 35px;
+    width: 35px;
     margin-right: 10px;
 }
 

@@ -37,7 +37,7 @@ def index(request, username=None):
     paginator = Paginator(status_post, 10)
 
     no_post = True
-    if(len(status_post) <= 2):
+    if(len(status_post) < 11):
         no_post = False
 
     try:

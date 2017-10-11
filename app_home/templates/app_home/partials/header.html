@@ -11,7 +11,11 @@
           <a href="javascript:void(0)" id="close" onclick="closeNav()">&times; Close</a>
       </div>
       <span id="button-header" class="pull-right" onclick="openNav()">
+          {% if user.photo %}
           <img class="display-pic" src="{{ user.photo.url }}">&#9776;
+          {% else %}
+          <img class="display-pic" src="{% static 'img/profile_pic.svg' %}">&#9776;
+          {% endif %}
       </span>
   </div>
 </nav>

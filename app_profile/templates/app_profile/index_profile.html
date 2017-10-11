@@ -1,1 +1,63 @@
-{{ user.username }}
+{% extends "app_home/layout/base.html" %}
+{% load static %}
+{% block stylesheet %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/profile.css'%}">
+
+{% endblock %}
+{% block content %}
+
+	<body>
+<br>
+<br>
+<br>
+<br>
+	<h1>P R O F I L E</h1>
+<br>
+	<center>
+	{% if user.photo %}
+    <img id="img" src="{{ user.photo.url }}">
+    {% else %}
+    <img class="img" src="{% static 'img/profile_pic.svg' %}">
+    {% endif %}
+    </center>
+<br>
+<br>
+	<h1 >{{ user.first_name }} {{ user.middle_name }} {{ user.last_name }}</h1>
+<br>
+<br>
+<table align = "center"  width="500" cellspacing = "40" cellpadding="40">
+<tr>
+	<td align = "left">Birthday</td>
+	<td align = "left">{{ user.birth_date }}</td>
+</tr>
+<tr>
+	<td align = "left">Gender</td>
+	<td align = "left">{{ user.gender }}</td>
+</tr>
+<tr>
+	<td align = "left">Expertise</td>
+	<td align = "left">
+		<ul>
+			{% for ii in user.expertise %}
+				<p>{{ ii }}</p>
+			{% endfor %}
+		</ul>
+	</td>
+	
+</tr>
+<tr>
+	<td align = "left">Description</td>
+	<td align = "left">{{ user.description }}</td>
+</tr>
+<tr>
+	<td align = "left">Email</td>
+	<td align = "left">{{ user.email }}</td>
+</tr>
+</table>
+</body>
+</html>
+
+
+
+
+

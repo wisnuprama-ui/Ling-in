@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView, ListView
 from django.contrib import messages
 from django.http import HttpResponseRedirect
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from ling_in import strings
 from .models import Status
 from app_profile.models import UserProfile
@@ -28,10 +29,22 @@ def index(request, username=None):
     # get context
     respones['user'] = user
     respones['status_form'] = StatusPostForm
-    respones['status_post'] = get_queryset(user)
     respones['page_title'] = 'Timeline'
-    return render(request, template_name, respones)
 
+    status_post = get_queryset(user)
+    page = request.GET.get('page', 1)
+    numbers_of_status = range(len(status_post))
+    paginator = Paginator(status_post, 10)
+
+    try:
+        status_stream = paginator.page(page)
+    except PageNotAnInteger:
+        status_stream = paginator.page(1)
+    except EmptyPage:
+        status_stream = paginator.page(paginator.num_pages)
+
+    respones['status_stream'] = status_stream
+    return render(request, template_name, respones)
 
 def get_queryset(user):
     """
@@ -40,7 +53,7 @@ def get_queryset(user):
     :return:
     """
     model = Status
-    return model.objects.filter(user=user).order_by('-created_at')[:10]
+    return model.objects.filter(user=user).order_by('-created_at')
 
 
 def add_status(request, username=None):

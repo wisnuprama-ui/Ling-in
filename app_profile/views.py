@@ -10,5 +10,4 @@ def index(request, username=None):
     user = get_object_or_404(UserProfile, username=username)
     response['user'] = user
     template_name = 'app_profile/index_profile.html'
-
     return render(request, template_name, response)

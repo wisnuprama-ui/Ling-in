@@ -1,0 +1,17 @@
+{% extends "app_home/layout/base.html" %}
+{% load static %}
+{% block stylesheet%}
+
+{% endblock %}
+{% block content %}
+<section>
+    {{ user.username }}
+    {% if latest_status %}
+    {{ latest_status }}
+    {% else %}
+    tidak ada
+    {% endif %}
+    {{ len_status }}
+    {{ jumlah_teman }}
+</section>
+{% endblock %}

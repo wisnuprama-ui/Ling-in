@@ -1,10 +1,12 @@
 {% extends "app_home/layout/base.html" %}
 {% load static %}
 {% block stylesheet%}
-
+<!-- @TODO ganti # dengan nama css yang diletakkan di static/css/ app_dashboard -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/#' %}" /> 
 {% endblock %}
 {% block content %}
 <section>
+    <!-- kreasinya disini, nanti kalo butuh referensi liat di app_timeline/templates/index_timeline.html -->
     {{ user.username }}
     {% if latest_status %}
     {{ latest_status }}

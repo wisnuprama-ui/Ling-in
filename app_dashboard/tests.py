@@ -1,10 +1,5 @@
 # from django.test import TestCase
 
-<<<<<<< HEAD
-# # Create your tests here.
-=======
-# Create your tests here.
->>>>>>> 046595f0ded6cbfaf8a9e8122afd73a35e2abfcd
 # class Lab5UnitTest(TestCase):
 #     def test_url_is_exist(self):
 #         response = Client().get('/stats/)

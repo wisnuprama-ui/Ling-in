@@ -125,7 +125,10 @@ h4 {
 .navbar-default .navbar-brand {
     color: #22181c;
     font-size: 20px;
-    
+}
+
+.navbar-default .navbar-brand .logo {
+    max-width: 30px;
 }
 
 .navbar-default .display-pic {

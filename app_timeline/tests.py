@@ -167,7 +167,7 @@ class AppTimelineFunctional(TestCase):
             birth_place=self.username,
             gender=app_profile_models.UserProfile.MALE,
             description=self.username + self.username + self.username
-        );
+        )
         self.user_profile.save()  # save
 
         chrome_options = Options()
@@ -186,7 +186,7 @@ class AppTimelineFunctional(TestCase):
     def test_timeline_input_status(self):
         selenium = self.selenium
         # Opening the link we want to test
-        selenium.get('http://127.0.0.1:8000/%s/timeline/' % ('wisnuprama'))
+        selenium.get('http://127.0.0.1:8000/%s/timeline/' % (self.username))
         isi_status = 'ini statusku, kalo kamu?'
 
         self.selenium.find_element_by_id('status-form-textarea').click()

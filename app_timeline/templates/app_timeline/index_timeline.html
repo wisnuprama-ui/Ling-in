@@ -7,7 +7,7 @@
 <section class="input-section" id="input-section">
     <div class="container" onscroll="minimizeStatusForm()">
         <div class="flex">
-            <form id="form" method="POST" action="{% url 'app_timeline:add_status' user.username %}"
+            <form class="form" id="form" method="POST" action="{% url 'app_timeline:add_status' user.username %}"
             onclick="growStatusForm()">
                 {% if messages %}
                     <div class="messages">

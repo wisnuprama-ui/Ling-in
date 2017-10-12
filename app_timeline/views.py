@@ -85,15 +85,15 @@ def get_queryset(user):
     for st in status_by_user:
         comment_for_this_st = Comment.objects.filter(status=st).order_by('-created_at')
 
+        if(len(comment_for_this_st) > 10):
+            comment_for_this_st = comment_for_this_st[:10]
+
         status_with_comment.append(
             StatusComment(
                 status=st, 
                 comment=comment_for_this_st
             )
         )
-
-    if(len(status_with_comment) > 10):
-        status_with_comment = status_with_comment[:10]
 
     return status_with_comment
 

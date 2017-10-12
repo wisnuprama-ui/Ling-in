@@ -17,10 +17,9 @@ from selenium.common.exceptions import ErrorInResponseException
 
 class AppFriendTest(TestCase):
 
-    username = 'anon'
-    user_profile = None
-
     def setUp(self):
+        self.username = 'Anonymous'
+
         self.user_profile = app_profile_models.UserProfile(
             username=self.username,
             first_name=self.username,

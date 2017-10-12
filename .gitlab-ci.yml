@@ -17,7 +17,7 @@ UnitTest:
         - wget https://chromedriver.storage.googleapis.com/2.32/chromedriver_linux64.zip
         - unzip chromedriver_linux64.zip
         - python manage.py collectstatic --no-input
-        - echo "from app_profile.models import UserProfile;from django.utils import timezone;UserProfile.objects.filter(username='Anonymous').delete(); username = 'Anonymous';UserProfile(username=username,first_name=username,middle_name=username,last_name=username,email=username + '@' + username + '.com',birth_date=timezone.now(),birth_place=username,gender=UserProfile.MALE)" | python manage.py shell
+        - echo "from app_profile.models import UserProfile;from django.utils import timezone;UserProfile.objects.filter(username='Anonymous').delete(); username = 'Anonymous';UserProfile(username=username,first_name=username,middle_name=username,last_name=username,email=username + '@' + username + '.com',birth_date=timezone.now(),birth_place=username,gender=UserProfile.MALE).save()" | python manage.py shell
         - python manage.py runserver 8000 &
     when: on_success
     script:

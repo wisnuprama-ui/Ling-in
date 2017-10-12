@@ -181,7 +181,7 @@ def AppTimelineFunctional(TestCase):
         chrome_options.add_argument('disable-gpu')
         self.selenium = webdriver.Chrome('./chromedriver', chrome_options=chrome_options)
 
-        super(AppTimelineTest, self).setUp()
+        super(AppTimelineFunctional, self).setUp()
 
     def tearDown(self):
         self.selenium.quit()

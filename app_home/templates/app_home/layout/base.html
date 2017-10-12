@@ -3,13 +3,13 @@
 <html lang="en">
   <head>
       {% include "app_home/partials/head.html" %}
+      {% block stylesheet %}
+      <!-- stylesheet -->
+      {% endblock %}
   </head>
   <body>
       <header> 
           {% include "app_home/partials/header.html" %}
-          {% block stylesheet %}
-                  <!-- stylesheet -->
-          {% endblock %}
       </header>
       <content>
           {% if messages %}

@@ -8,7 +8,8 @@ body {
     margin:0;
     margin-bottom: 60px;
     padding:0;
-    padding-bottom: 75px;
+    padding-bottom: 55px;
+    background-color: #F3F2F2;
 }
 
 .navbar-static-top {
@@ -16,7 +17,6 @@ body {
 }
 
 .footer {
-    margin-top: 50px;
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -88,21 +88,21 @@ table, th, td {
 }
 
 h1 {
-    font-family: 'Merriweather', serif;
+    font-family: 'Lobster', cursive;
     font-size: 60px;
 }
 
 h2 {
-    font-family: 'Merriweather', serif;
+    font-family: 'Lobster', cursive;
 }
 
 h3 {
-    font-family: 'Merriweather', serif;
+    font-family: 'Lobster', cursive;
     font-weight: 500;
 }
 
 h4 {
-    font-family: 'Merriweather', serif;
+    font-family: 'Lobster', cursive;
 }
 
 .navbar-default {

@@ -1,1 +1,63 @@
-{{ user.username }}
+{% extends "app_home/layout/base.html" %}
+{% load static %}
+{% block stylesheet %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/profile.css'%}">
+
+{% endblock %}
+{% block content %}
+
+	<body>
+<br>
+<br>
+<br>
+<br>
+	<h1>P R O F I L E</h1>
+<br>
+	<center>
+	{% if user.photo %}
+    <img id="img" src="{{ user.photo.url }}">
+    {% else %}
+    <img class="img" src="{% static 'img/profile_pic.svg' %}">
+    {% endif %}
+    </center>
+<br>
+<br>
+	<h1 >{{ user.first_name }} {{ user.middle_name }} {{ user.last_name }}</h1>
+<br>
+<br>
+<table>
+<tr>
+	<td>Birthday</td>
+	<td>{{ user.birth_date }}</td>
+</tr>
+<tr>
+	<td >Gender</td>
+	<td>{{ user.gender }}</td>
+</tr>
+<tr>
+	<td>Expertise</td>
+	<td"left">
+		<ul>
+			{% for ii in user.expertise %}
+				<p>{{ ii }}</p>
+			{% endfor %}
+		</ul>
+	</td>
+	
+</tr>
+<tr>
+	<td>Description</td>
+	<td>{{ user.description }}</td>
+</tr>
+<tr>
+	<td>Email</td>
+	<td>{{ user.email }}</td>
+</tr>
+</table>
+</body>
+</html>
+
+
+
+
+

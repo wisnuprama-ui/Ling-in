@@ -8,22 +8,22 @@
             <div class="status-hover">
                 <div class="status" id="{{ data.id }}">
                     <div class="header">
-                        <div class="">
+                        <div>
                             {% if data.user.photo %}
                             <img class="display-pic" src="{{ data.user.photo.url }}">
                             {% else %}
                             <img class="display-pic" src="{% static 'img/profile_pic.svg' %}">
                             {% endif %}
                         </div>
-                        <div class="">
-                        <!-- link to stats or dashboard of this username -->
-                            <a href="/{{ data.user.username }}/" >
+                        <div>
+                            <!-- link to profile -->
+                            <a href="{% url 'app_profile:profile_page' data.user.username %}" >
                                 <h4 class="card-title">@{{ data.user.username }}</h4>
                             </a>
                         </div>
                     </div>
-                    <p><b>{{data.created_at}}</b><p/>
                     <p>{{ data.content|markdown }}</p>
+                    <p class="status-date">{{data.created_at}}<p/>
                     <div class="pull-right">
                         <a id="data-{{ data.id }}" href="{% url 'app_timeline:delete_status' data.user.username data.id %}" >
                             <img class="delete-button" src="{% static 'img/delete.svg' %}">

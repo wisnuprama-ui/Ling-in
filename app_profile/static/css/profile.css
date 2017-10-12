@@ -1,5 +1,7 @@
 img{
 	border-radius: 50%;
+	max-height:200px;
+	max-width: 200px;
 }
 
 body{
@@ -8,8 +10,22 @@ body{
 
 h1{
 	text-align: center;
-	font-size: 30px;
+	font-size: 50px;
 	color: #262D31;
+}
+
+h2{
+	text-align: center;
+	font-size: 28px;
+	color: #262D31;
+	font-family: 'Montserrat', serif;
+}
+
+h3{
+	text-align: center;
+	font-size: 20px;
+	color: #262D31;
+	font-family: 'Montserrat', serif;
 }
 
 table{
@@ -28,3 +44,22 @@ p{
 	font-family: 
 
 }
+
+.profile {
+	/*display:flex;*/
+	min-width: 50%;
+	padding-left:50px;
+	padding-right: 50px;
+	align-content: center;
+}
+
+.profile p{
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+
+.profile p b{
+	margin-right:50px;
+}
+

@@ -93,16 +93,16 @@ h1 {
 }
 
 h2 {
-    font-family: 'Lobster', cursive;
+    font-family: 'Montserrat', serif;
 }
 
 h3 {
-    font-family: 'Lobster', cursive;
+    font-family: 'Montserrat', serif;
     font-weight: 500;
 }
 
 h4 {
-    font-family: 'Lobster', cursive;
+    font-family: 'Montserrat', serif;
 }
 
 .navbar-default {
@@ -125,7 +125,7 @@ h4 {
 .navbar-default .navbar-brand {
     color: #22181c;
     font-size: 20px;
-    font-family: 'Merriweather'
+    
 }
 
 .navbar-default .display-pic {
@@ -154,7 +154,7 @@ h4 {
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 60px; /* Place content 60px from the top */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
-    font-family: 'Merriweather', serif;
+    font-family: 'Montserrat', serif;
 }
 
 /* The navigation menu links */

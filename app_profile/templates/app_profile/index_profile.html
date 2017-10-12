@@ -25,18 +25,18 @@
 	<h1 >{{ user.first_name }} {{ user.middle_name }} {{ user.last_name }}</h1>
 <br>
 <br>
-<table align = "center"  width="500" cellspacing = "40" cellpadding="40">
+<table>
 <tr>
-	<td align = "left">Birthday</td>
-	<td align = "left">{{ user.birth_date }}</td>
+	<td>Birthday</td>
+	<td>{{ user.birth_date }}</td>
 </tr>
 <tr>
-	<td align = "left">Gender</td>
-	<td align = "left">{{ user.gender }}</td>
+	<td >Gender</td>
+	<td>{{ user.gender }}</td>
 </tr>
 <tr>
-	<td align = "left">Expertise</td>
-	<td align = "left">
+	<td>Expertise</td>
+	<td"left">
 		<ul>
 			{% for ii in user.expertise %}
 				<p>{{ ii }}</p>
@@ -46,12 +46,12 @@
 	
 </tr>
 <tr>
-	<td align = "left">Description</td>
-	<td align = "left">{{ user.description }}</td>
+	<td>Description</td>
+	<td>{{ user.description }}</td>
 </tr>
 <tr>
-	<td align = "left">Email</td>
-	<td align = "left">{{ user.email }}</td>
+	<td>Email</td>
+	<td>{{ user.email }}</td>
 </tr>
 </table>
 </body>

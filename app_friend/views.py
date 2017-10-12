@@ -42,6 +42,19 @@ def new_friend(request, username=None):
     else:        
         return HttpResponseRedirect('/%s/friends/' % (username))
 
+def delete_friend(request, username=None, friend_id=None):
+    """
+    @TODO need to find the safe method to delete object
+    :param request:
+    :param username:
+    :param status_id:
+    :return:
+    """
+    model = Friend
+
+    user = get_object_or_404(UserProfile, username=username)
+    get_object_or_404(model, pk=friend_id).delete()
+    return HttpResponseRedirect('/%s/friends/' % (user.username))
 
 
 

@@ -1,33 +1,52 @@
-{% load static %}
+{% extends "app_friend/layout/base.html" %}
 
-<form id="form" method="POST" action="{% url 'app_friend:addfriend' user.username %}">
-                {% if messages %}
-                    <div class="messages">
-                        {% for message in messages %}
-                            <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-                <div class="row">
-                    <div class="col-sm-1">
-                        {% if user.photo %}
-                        <img id="img" src="{{ user.photo.url }}">
-                        {% else %}
-                        <img class="img" src="{% static 'img/profile_pic.svg' %}">
-                        {% endif %}
-                    </div>
-                    <div class="col-sm-11">
-                        {% csrf_token %}
-                        {{ friend_form }}                        
-                    </div>
-                </div>
-                <div class="button">
-                    <input id="submit" type="submit" class="btn btn-lg btn-info pull-right" value="Post">
-                </div>
-                <br>
+{% block content %}
 
-{% for f in friends %}
-    {{ f.name }}
-    {{ f.url }}
-    {{ f.created_at }}
-{% endfor %}
+<h1 class="main-title">TODOLIST</h1>
+<hr/>
+<section name="input-list" id="input-list">
+    <div class="container">
+        <form id="form" method="POST" action="{% url 'app_friend:add_friend' user.username %}">
+            <h2>Add Friend</h2>
+            {% csrf_token %}
+            {{ friend_form }}
+            <input id="submit" type="submit" class="btn btn-lg btn-block btn-info" value="Submit">
+            <br>
+        </form>
+    </div>
+</section>
+<section name="my-list" id="my-list">
+    <div class="container">
+        <h2 class="my-list-title">My Friend</h2>
+        <div class="flex">
+            {% if friends %}
+                {% for data in friends %}
+                    <div class="flex-item">
+                        <div class="to-do-list">
+                            <div class="to-do-list-title">
+                                {{data.name}}
+                            </div>
+                            <div class="to-do-list-date-added">
+                                {{data.created_date}}
+                            </div>
+                            <div class="to-do-list-description">
+                                {{data.url }}
+                            </div>
+                            <div class="to-do-list-delete">
+                                <a href="{% url 'app_friend:delete_friend' user.username data.id %}">
+                                    <div class="to-do-list-delete-button" data-id="{{data.id}}">Delete</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+            <div class="alert alert-danger text-center">
+                <strong>Oops!</strong> Tidak ada data Todo.
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}       

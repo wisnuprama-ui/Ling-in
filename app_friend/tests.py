@@ -50,7 +50,7 @@ class AppFriendTest(TestCase):
         #Creating a new activity
         new_activity = Friend.objects.create(name='seto',url='sbmlagi.herokuapp.com')
 
-        #Retrieving all available activity
+        #Retrieving     all available activity
         counting = Friend.objects.all().count()
         self.assertEqual(counting,1)
 

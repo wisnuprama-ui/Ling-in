@@ -10,15 +10,15 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import ErrorInResponseException
+import createdefaultuserprofile
 
 # Create your tests here.
 
 class AppTimelineTest(TestCase):
 
-    username = 'anon'
-    user_profile = None
-
     def setUp(self):
+        self.username = createdefaultuserprofile.username
+        
         self.user_profile = app_profile_models.UserProfile(
             username=self.username,
             first_name=self.username,
@@ -153,26 +153,10 @@ class AppTimelineTest(TestCase):
         html_response = response.content.decode('utf8')
         self.assertNotIn(test, html_response)
 
-def AppTimelineFunctional(TestCase):
-
-    username = 'anon'
-    user_profile = None
-    selenium = None
+class AppTimelineFunctional(TestCase):
 
     def setUp(self):
-        self.username = 'anon'
-        self.user_profile = app_profile_models.UserProfile(
-            username=self.username,
-            first_name=self.username,
-            middle_name=self.username,
-            last_name=self.username,
-            email=self.username + '@' + self.username + '.com',
-            birth_date=timezone.now(),
-            birth_place=self.username,
-            gender=app_profile_models.UserProfile.MALE,
-            description=self.username + self.username + self.username
-        );
-        self.user_profile.save()  # save
+        self.default_username = createdefaultuserprofile.username
 
         chrome_options = Options()
         chrome_options.add_argument('--dns-prefetch-disable')
@@ -190,9 +174,10 @@ def AppTimelineFunctional(TestCase):
     def test_timeline_input_status(self):
         selenium = self.selenium
         # Opening the link we want to test
-        selenium.get('http://127.0.0.1:8000/%s/timeline/' % (self.user_profile.username))
+        selenium.get('http://127.0.0.1:8000/%s/timeline/' % (self.default_username))
         isi_status = 'ini statusku, kalo kamu?'
 
+        self.selenium.click('form')
         status = selenium.find_element_by_id('status-form-textarea')
         submit = selenium.find_element_by_id('submit')
         status.send_keys(isi_status)

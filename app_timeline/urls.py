@@ -7,5 +7,5 @@ urlpatterns = [
     url(r'^(?P<username>\w+)/timeline/add_status/$', add_status, name='add_status'),
     url(r'^(?P<username>\w+)/timeline/delete/(?P<status_id>[0-9]+)/$', delete_status, name='delete_status'),
     url(r'^(?P<username>\w+)/timeline/comment/(?P<status_id>[0-9]+)/$', index_comment, name='comment'),
-    url(r'^(?P<username>\w+)/timeline/comment/(?P<status_id>[0-9]+)/$', comment_status, name='comment_status'),
+    url(r'^(?P<username>\w+)/timeline/comment/(?P<status_id>[0-9]+)/post_comment/$', comment_status, name='comment_status'),
 ]

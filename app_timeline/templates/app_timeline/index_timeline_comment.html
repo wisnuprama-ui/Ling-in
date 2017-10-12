@@ -11,40 +11,34 @@
             <div class="status-stream" id="status-stream" style="margin-top:150px">
                 <div class="stream">
                     <div class="status-hover">
-                            <div class="status" id="{{ status.id }}">
-                                <div class="header">
-                                    <div>
-                                        {% if status.user.photo %}
-                                        <img class="display-pic" src="{{ status.user.photo.url }}">
-                                        {% else %}
-                                        <img class="display-pic" src="{% static 'img/profile_pic.svg' %}">
-                                        {% endif %}
-                                    </div>
-                                    <div>
-                                        <!-- link to profile -->
-                                        <a href="{% url 'app_profile:profile_page' status.user.username %}" >
-                                            <h4 class="card-title">@{{ status.user.username }}</h4>
-                                        </a>
-                                    </div>
+                        <div class="status" id="{{ status.id }}">
+                            <div class="header">
+                                <div>
+                                    {% if status.user.photo %}
+                                    <img class="display-pic" src="{{ status.user.photo.url }}">
+                                    {% else %}
+                                    <img class="display-pic" src="{% static 'img/profile_pic.svg' %}">
+                                    {% endif %}
                                 </div>
-                                <p>{{ status.content|markdown }}</p>
-                                <p class="status-date">{{status.created_at}}<p/>
-                                {% if status.user == user %}
-                                <div class="pull-right">
-                                    <a id="status-{{ status.id }}" href="{% url 'app_timeline:delete_status' status.user.username status.id %}" >
-                                        <img class="delete-button" src="{% static 'img/delete.svg' %}">
-                                    </a>
-                                </div>
-                                {% endif %}
-                                <div class="pull-right">
-                                    <a id="status-{{ status.id }}" href="{% url 'app_timeline:comment' user.username status.id %}" >
-                                        <img class="delete-button" src="{% static 'img/comment.svg' %}">
+                                <div>
+                                    <!-- link to profile -->
+                                    <a href="{% url 'app_profile:profile_page' status.user.username %}" >
+                                        <h4 class="card-title">@{{ status.user.username }}</h4>
                                     </a>
                                 </div>
                             </div>
+                            <p>{{ status.content|markdown }}</p>
+                            <p class="status-date">{{status.created_at}}<p/>
+                            {% if status.user == user %}
+                            <div class="pull-right">
+                                <a id="status-{{ status.id }}" href="{% url 'app_timeline:delete_status' status.user.username status.id %}" >
+                                    <img class="delete-button" src="{% static 'img/delete.svg' %}">
+                                </a>
+                            </div>
+                            {% endif %}
                         </div>
+                    </div>
                 </div>
-
             </div>
             <form id="form" method="POST" action="{% url 'app_timeline:comment_status' user.username status.id %}"
             onclick="growStatusForm()">

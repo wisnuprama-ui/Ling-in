@@ -58,6 +58,7 @@
         $('#input-section form .status-form-textarea').animate({'max-height':'100%','border-radius':'1rem'});
         if(minSc.matches){$('#input-section form img').css({'max-width':'75px', 'max-height':'75px'})}
     }
+
     $(document).scroll(function minimizeStatusForm(){
         if($(this).scrollTop() > 100){
             $('#input-section form').css('height', '100px');
@@ -75,6 +76,6 @@
         var input_form = document.getElementById('status-form-textarea').value;
         var value_length = input_form.length + 1;
         document.getElementById('cal_char').innerHTML = 351 - value_length;
-    }  
+    }
 </script>
 {% endblock %}

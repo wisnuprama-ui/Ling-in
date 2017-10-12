@@ -1,0 +1,35 @@
+{% for comment in status.comment%}
+            <div class="status-hover">
+                <div class="status" id="{{ data.id }}">
+                    <div class="header">
+                        <div>
+                            {% if data.user.photo %}
+                            <img class="display-pic" src="{{ data.user.photo.url }}">
+                            {% else %}
+                            <img class="display-pic" src="{% static 'img/profile_pic.svg' %}">
+                            {% endif %}
+                        </div>
+                        <div>
+                            <!-- link to profile -->
+                            <a href="{% url 'app_profile:profile_page' data.user.username %}" >
+                                <h4 class="card-title">@{{ data.user.username }}</h4>
+                            </a>
+                        </div>
+                    </div>
+                    <p>{{ data.content|markdown }}</p>
+                    <p class="status-date">{{data.created_at}}<p/>
+                    {% if data.user == user %}
+                    <div class="pull-right">
+                        <a id="data-{{ data.id }}" href="{% url 'app_timeline:delete_status' data.user.username data.id %}" >
+                            <img class="delete-button" src="{% static 'img/delete.svg' %}">
+                        </a>
+                    </div>
+                    {% endif %}
+                    <div class="pull-right">
+                        <a id="data-{{ data.id }}" href="{% url 'app_timeline:comment' user.username data.id %}" >
+                            <img class="delete-button" src="{% static 'img/comment.svg' %}">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}

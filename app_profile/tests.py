@@ -9,7 +9,7 @@ class ProfileUnitTest(TestCase):
 		self.assertEqual(response.status_code, 200)
 
 	def test_profile_using_index_func(self):
-		found = resolve('/app_profile/')
+		found = resolve('app_profile:profile_page')
 		self.assertTrue(found.func, index)
 
 	#def test_profile_edited_using_edit_func(self):

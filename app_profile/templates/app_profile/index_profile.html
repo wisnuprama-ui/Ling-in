@@ -6,12 +6,86 @@
 {% endblock %}
 {% block content %}
 
-	<body>
+<section class="stats-stream" id="stats-stream">
+    <div class="container">
+        <div class="flex">
+            <div class="stream">
+                <div class="flex-item">
+                <br>
+				<br>
+                    <h1><b>Profile</b></h1>
+                    <br>
+					<br>
+					<br>
+                    <div class="stats">
+                        <div class="flex-center">
+                            {% if user.photo %}
+                            <img class="display-pic" src="{{ user.photo.url }}">
+                            {% else %}
+                            <img class="display-pic" src="{% static 'img/profile_pic.svg' %}">
+                            {% endif %}
+                            <br>
+							<br>
+                            <h2><b>{{ user.first_name }} {{ user.middle_name }} {{ user.last_name }}</b></h2>
+                            <br>
+							<br>
+                            <div class="flex-item">
+                            <div class="row">
+                            	<div class="profile">
+                            	<div class="col-sm-6">
+                            		<p><b>Birthday</b></p>
+                            	</div>
+                            	<div class="col-sm-6">
+                            		<p>{{ user.birth_date }}</p>	
+                            	</div>
+                            	<div class="col-sm-6">
+                            		<p><b>Gender</b></p>
+                            	</div>
+                            	<div class="col-sm-6">
+                            		<p>{{ user.gender }}</p>	
+                            	</div>
+                            	<div class="col-sm-6">
+                            		<p><b>Email</b></p>
+                            	</div>
+                            	<div class="col-sm-6">
+                            		<p>{{ user.email }}</p>	
+                            	</div>
+                                <div class="col-sm-6">
+                            		<p><b>Expertise</b></p>
+                            	</div>
+                            	<div class="col-sm-6">
+                            		{% for ii in user_expertise %}
+									<p>{{ ii }}</p>
+									{% endfor %}
+                            	</div>
+                            	</div>                    
+                        	</div>
+                    	</div>
+                    <h3>Description</h3><p>{{ user.description }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+<!-- 	<body>
 <br>
 <br>
 <br>
 <br>
-	<h1>P R O F I L E</h1>
+	<h1>Profile</h1>
+<br>
+<br>
 <br>
 	<center>
 	{% if user.photo %}
@@ -22,7 +96,7 @@
     </center>
 <br>
 <br>
-	<h1 >{{ user.first_name }} {{ user.middle_name }} {{ user.last_name }}</h1>
+	<h2 >{{ user.first_name }} {{ user.middle_name }} {{ user.last_name }}</h2>
 <br>
 <br>
 <table>
@@ -55,9 +129,9 @@
 </tr>
 </table>
 </body>
-</html>
+</html> -->
 
-
+{% endblock %}
 
 
 

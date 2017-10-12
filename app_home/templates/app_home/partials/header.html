@@ -1,7 +1,10 @@
 {% load static %}
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
-      <div class="navbar-brand">Ling-In</div>
+      <div class="navbar-brand">
+        <img src="https://pbs.twimg.com/media/DL7VTqmUQAIlNCk.jpg">
+        Ling-In
+      </div>
       <div id="sidenav" class="sidenav">
           <a href="{% url 'app_dashboard:stats' user.username %}">Dashboard</a>
           <a href="{% url 'app_timeline:timeline_page' user.username %}">Timeline</a>

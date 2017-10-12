@@ -16,7 +16,7 @@ class FriendForm(forms.Form):
 
     url_attrs = {
         'type':'text',
-        'class':'input-form-textinput',
+        'class':'input-form-name',
         'id':'input-form-url',
         'placeholder':'What is your friend\'s url',
         'cols': 100,

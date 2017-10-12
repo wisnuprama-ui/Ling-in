@@ -36,10 +36,11 @@ section{
   }
 }
 #input-list{
-  background: linear-gradient(to bottom right, #606062, #393939);
+  background: linear-gradient(to bottom right, #c13288, #7212cc);
 }
 #input-list form{
-  width: 400px;
+  width: 1080px;
+  height: 500px;
   margin: 50px auto;
   text-align: center;
   position: relative;
@@ -48,9 +49,10 @@ section{
   border: 0 none;
   border-radius: 3px;
   box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
-  padding: 20px 30px;
+  padding: 60px 70px;
   box-sizing: border-box;
   position: relative;
+  filter: alpha(opacity=50);
 }
 #input-list form > h2{
   font-size: 1.3em;
@@ -59,21 +61,22 @@ section{
   margin-bottom: 10px;
 }
 #input-list form > .todo-form-input, #input-list form > .todo-form-textarea{
-  padding: 15px;
+  padding: 366px;
     border: 1px solid #ccc;
-    border-radius: 3px;
-    margin-bottom: 10px;
-    width: 100%;
+    border-radius: 30px;
+    margin-bottom: 100px;
+    width: 300%;
+    height: 150%;
     box-sizing: border-box;
     color: #2C3E50;
-    font-size: 13px;
+    font-size: 26px;
 }
 
 #my-list{
-  background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+  background: linear-gradient(141deg, #2bb80f 0%, #1fc8db 51%, #2bb80f 75%);
 }
 #my-list .my-list-title{
-  font-size: 40px;
+  font-size: 72px;
   margin-bottom: 1em;
   color: white;
   text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
@@ -154,7 +157,7 @@ section{
   bottom: 1px;
   position: absolute;
   cursor: pointer;
-  z-index: -1;
+  z-index: -1 ;
   -webkit-border-radius: 0 0px 2px 2px;
   -moz-border-radius: 0 0px 2px 2px;
   -o-border-radius: 0 0px 2px 2px;

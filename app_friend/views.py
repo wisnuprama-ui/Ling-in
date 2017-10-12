@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from .models import Friendship,Friend
 from app_profile.models import UserProfile
 from .forms import FriendForm
+import requests
 
 response = {}
 
@@ -56,5 +57,56 @@ def delete_friend(request, username=None, friend_id=None):
     get_object_or_404(model, pk=friend_id).delete()
     return HttpResponseRedirect('/%s/friends/' % (user.username))
 
+def validate_url(url=str()):
+    try:
+        # get request for 0.8 sec
+        resp = requests.get(url, timeout=2)
+        print(resp)
+        if(resp.status_code < 400):
+            return True
+
+    except requests.exceptions.MissingSchema:
+        # the url is not valid --> regex
+        return False
+    except requests.exceptions.ReadTimeout:
+        # time-out: too long to responses
+        return False
+    except:
+        pass
+    return False
+
+def new_friend(request, username=None):
+
+    user=get_object_or_404(UserProfile, username=username)
+
+    form = FriendForm(request.POST or None)
+    if(request.method == 'POST' and form.is_valid()):
+        friend_name = request.POST['name']
+        friend_url = request.POST['url']
+
+        url_valid = validate_url(friend_url)
+
+        if(url_valid):
+            # if url is valid, then create the relation
+            get_friend = Friend.objects.filter(url=friend_url)
+            
+            # check if friend is already in database
+            if(len(get_friend) > 0):
+                friend = get_friend[0]
+            else:
+                friend=Friend(name=friend_name, url=friend_url)
+                friend.save()
+
+            # check if the relation between user and friend is already created in the past
+            # if true, then we won't make it.
+
+            # get friendship that has relation with user and the friend
+            get_friendship = Friendship.objects.filter(user=user, friend=friend)
+
+            Friendship(user=user, friend=friend).save()
+
+        return HttpResponseRedirect('/%s/friends/' % (username))
+    else:
+        return HttpResponseRedirect('/%s/friends/' % (username))
 
 

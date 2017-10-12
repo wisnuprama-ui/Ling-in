@@ -1,10 +1,6 @@
 from django.db import models
 from app_profile.models import UserProfile
 
-# Create your models here.
-def convertTime():
-	return timezone.now() + timezone.timedelta(hours=7)
-
 class Friend(models.Model):
     name = models.CharField(max_length=100)
     url = models.URLField(unique=True)

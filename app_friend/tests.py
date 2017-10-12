@@ -115,7 +115,7 @@ class AppFriendTest(TestCase):
 
 class AppFriendFunctional(TestCase):
 
-        username = 'anon'
+        username = 'anonanon'
         user_profile = None
         selenium = None
 

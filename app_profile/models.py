@@ -72,7 +72,7 @@ class ExpertIn(models.Model):
     Model for bridging user with many expertise
 
     """
-    user = models.ForeignKey(UserProfile)
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     expertise = models.ForeignKey(Expertise)
 
     created_at = models.DateTimeField(auto_now_add=True)

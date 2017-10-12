@@ -1,7 +1,10 @@
 from app_profile.models import UserProfile
 from django.utils import timezone
+from django.core.management import setup_environ
+from mysite import settings
 
 if("__main__" == __name__):
+    setup_environ(settings)
     username = 'anonymous'
     user_profile = UserProfile(
             username=username,

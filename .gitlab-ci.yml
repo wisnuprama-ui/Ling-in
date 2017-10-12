@@ -10,7 +10,6 @@ UnitTest:
         - python manage.py makemigrations
         - python manage.py migrate
         - python manage.py collectstatic --no-input
-        - python createdefaultuserprofile.py
     when: on_success
     script:
         - coverage run --include='app_*/*' manage.py test
@@ -25,7 +24,6 @@ FunctionalTest:
         - pip install -r requirements.txt
         - python manage.py makemigrations
         - python manage.py migrate
-        - python createdefaultuserprofile.py
         - apt-get update -qq && apt-get install -y -qq unzip
         - apt-get install -y google-chrome-stable
         - apt-get install -y xvfb

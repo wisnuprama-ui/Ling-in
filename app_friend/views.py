@@ -3,7 +3,6 @@ from django.http import HttpResponseRedirect
 from .models import Friendship,Friend
 from app_profile.models import UserProfile
 from .forms import FriendForm
-import requests
 
 response = {}
 

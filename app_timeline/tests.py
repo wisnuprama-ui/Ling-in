@@ -2,8 +2,8 @@ from django.test import TestCase, Client
 from django.urls import reverse, resolve
 from django.utils import timezone
 from django.http import HttpResponseRedirect, HttpRequest
-from .models import Status
-from .views import index, add_status, delete_status, get_queryset
+from .models import Status, Comment
+from .views import index, add_status, delete_status, get_queryset, StatusComment, index_comment
 from .forms import StatusPostForm
 import app_profile.models as app_profile_models
 from selenium import webdriver
@@ -42,7 +42,7 @@ class AppTimelineTest(TestCase):
         model(user=self.user_profile, content=content).save()
 
         # check the numbers activity
-        counting_all_status = model.objects.all().count()
+        counting_all_status = model.objects.count()
         self.assertEqual(counting_all_status, 1)
 
     def test_timeline_model_status_str(self):
@@ -70,18 +70,40 @@ class AppTimelineTest(TestCase):
             model(user=self.user_profile, content=content).save()
 
         query = get_queryset(self.user_profile)
-        self.assertEqual(len(query), model.objects.all().count())
+        self.assertEqual(len(query), model.objects.count())
 
     def test_timeline_url(self):
-         url = reverse('app_timeline:timeline_page', args=[self.username])
-         self.assertEqual(url, '/%s/timeline/' % (self.username))
+        url = reverse('app_timeline:timeline_page', args=[self.username])
+        self.assertEqual(url, '/%s/timeline/' % (self.username))
 
-         url = reverse('app_timeline:add_status', args=[self.username])
-         self.assertEqual(url, '/%s/timeline/add_status/' % (self.username))
+        url = reverse('app_timeline:add_status', args=[self.username])
+        self.assertEqual(url, '/%s/timeline/add_status/' % (self.username))
+        
+        url = reverse('app_timeline:delete_status', args=[self.username, 0])
+        self.assertEqual(url, '/%s/timeline/delete/%d/'%(self.username, 0))
+
+        url = reverse('app_timeline:comment', args=[self.username, 0])
+        self.assertEqual(url, '/%s/timeline/comment/%d/'%(self.username, 0))
+
+        url = reverse('app_timeline:comment_status', args=[self.username, 0])
+        self.assertEqual(url, '/%s/timeline/comment/%d/post_comment/'%(self.username, 0))
 
     def test_timeline_index_func(self):
         found = resolve('/%s/timeline/' % (self.username))
         self.assertEqual(found.func, index)
+    
+    def test_timeline_index_comment_func(self):
+        found = resolve('/%s/timeline/comment/%d/' % (self.username, 0))
+        self.assertEqual(found.func, index_comment)
+        
+        content = 'Lorem ipsum dolor sit amet yo yoy'
+        new_status = Status(user=self.user_profile, content=content)
+        new_status.save()
+
+        response = index_comment(HttpRequest(), username=self.user_profile, status_id=new_status.id)
+        html_response = response.content.decode('utf-8')
+        self.assertIn('Comment', html_response)
+        self.assertIn(new_status.content, html_response)
 
     def test_timeline_delete_status_func(self):
         model = Status
@@ -133,7 +155,7 @@ class AppTimelineTest(TestCase):
 
         # counting status == 1
         # success
-        counting_status = model.objects.all().count()
+        counting_status = model.objects.count()
         self.assertEqual(counting_status, 1)
 
         # check if there is the status in html respone
@@ -149,9 +171,88 @@ class AppTimelineTest(TestCase):
                                       {'content':''})
         self.assertEqual(response_post.status_code, 302)
 
-        response = Client().get('/%s/timeline/')
+        response = Client().get('/%s/timeline/' % self.username)
         html_response = response.content.decode('utf8')
         self.assertNotIn(test, html_response)
+    
+    def test_timeline_post_comment_success(self):
+        model = Comment
+        test = 'ini isi content kita'
+        status = Status(user=self.user_profile, content=test)
+        status.save()
+
+        response_post = Client().post('/%s/timeline/comment/%d/post_comment/' % (self.username, status.id),
+                                      {'content': test})
+        # redirect
+        self.assertEqual(response_post.status_code, 302)
+
+        counting_comment = model.objects.count()
+        self.assertEqual(counting_comment, 1)
+
+        # check if there is the status in html respone
+        response = Client().get('/%s/timeline/' % (self.username))
+        html_response = response.content.decode('utf8')
+        self.assertIn(test, html_response)
+
+    def test_timeline_comment_error(self):
+        test = 'well done body'
+        status = Status(user=self.user_profile, content='blabla')
+        status.save()
+
+        response_post = Client().post('/%s/timeline/comment/%d/post_comment/' % (self.username, status.id),
+                                      {'content':''})
+        self.assertEqual(response_post.status_code, 302)
+
+        response = Client().get('/%s/timeline/' % self.username)
+        html_response = response.content.decode('utf8')
+        self.assertNotIn(test, html_response)
+    
+    def test_timeline_models_comment(self):
+        status = Status(user=self.user_profile, content='behehehe')
+        status.save()
+        comment = Comment(
+            user=self.user_profile,
+            status=status,
+            content='behehehe')
+        comment.save()
+
+        _str_ = '%s: %s - %s' % (status, self.user_profile, comment.content)
+
+        self.assertEqual(Comment.objects.count(), 1)
+        self.assertEqual(comment.__str__(), _str_)
+
+    def test_timeline_statuscomment(self):
+        status = Status(user=self.user_profile, content='behehehe')
+        status.save()
+        status_comment = StatusComment(status=status)
+        
+        test = '%s: %d' % (status, 0)
+
+        self.assertEqual(test, status_comment.__str__())
+        self.assertEqual(test, status_comment.__repr__())
+
+    def test_timeline_query_status_more_than_50(self):
+        st = None
+        for i in range(51):
+            st = Status(user=self.user_profile, content='behehe')
+            st.save()
+
+        for i in range(11):
+            Comment(user=self.user_profile, status=st, content='behehe2').save()
+        
+        query = get_queryset(self.user_profile)
+
+        target_sc = None
+        for sc in query:
+            if(sc.status==st):
+                target_sc = sc
+                break;
+
+        self.assertEqual(len(query), 50)
+        self.assertEqual(len(target_sc.comment), 10)
+    
+
+
 
 class AppTimelineFunctional(TestCase):
 

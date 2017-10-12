@@ -72,7 +72,7 @@ class AppFriendTest(TestCase):
         self.assertEqual(response.status_code, 302)
 
     def test_add_friend_success(self):
-        response = Client().post('/%s/friends/add_friend/' % self.username, {'name': 'wkwk', 'url': 'www.w.com'})
+        response = Client().post('/%s/friends/add_friend/' % self.username, {'name': 'wkwk', 'url': 'https://detik.com'})
         self.assertEqual(response.status_code, 302)
         html_response = response.content.decode('utf8')
         count = Friend.objects.all().count()
@@ -82,7 +82,7 @@ class AppFriendTest(TestCase):
     def test_add_friend_showing_all(self):
 
         name_budi = 'Budi'
-        url_budi = 'budi.ui.ac.id'
+        url_budi = 'https://google.co.id'
         data_budi = {'name': name_budi, 'url': url_budi}
         post_data_budi = Client().post('/%s/friends/add_friend/' % (self.username), data_budi)
         self.assertEqual(post_data_budi.status_code, 302)
@@ -149,9 +149,9 @@ class AppFriendFunctional(TestCase):
         def test_timeline_input_status(self):
             selenium = self.selenium
             # Opening the link we want to test
-            selenium.get('http://127.0.0.1:8000/%s/timeline/' % (self.user_profile.username))
+            selenium.get('http://127.0.0.1:8000/%s/friends/' % (self.user_profile.username))
             isi_nama = 'namaku ada lima'
-            isi_url = 'www.iniurlku.com'
+            isi_url = 'https://www.google.com'
 
             name = selenium.find_element_by_id('input-form-name')
             url = selenium.find_element_by_id('input-form-url')

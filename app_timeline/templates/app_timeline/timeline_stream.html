@@ -1,0 +1,88 @@
+{% load static %}
+{% load markdown_deux_tags %}
+<div class="infinite-container">
+        <div class="flex-item">
+            {% if status_stream %}
+            {% for data in status_stream %}
+            <!-- status -->
+            <div class="status-hover">
+                <div class="status" id="{{ data.id }}">
+                    <div class="header">
+                        <div>
+                            {% if data.status.user.photo %}
+                            <img class="display-pic" src="{{ data.status.user.photo.url }}">
+                            {% else %}
+                            <img class="display-pic" src="{% static 'img/profile_pic.svg' %}">
+                            {% endif %}
+                        </div>
+                        <div>
+                            <!-- link to profile -->
+                            <a href="{% url 'app_profile:profile_page' data.status.user.username %}" >
+                                <h4 class="card-title">@{{ data.status.user.username }}</h4>
+                            </a>
+                        </div>
+                    </div>
+                    <p>{{ data.status.content|markdown }}</p>
+                    <p class="status-date">{{data.status.created_at}}<p/>
+                    {% if data.status.user == user %}
+                    <div class="pull-right">
+                        <a id="data-{{ data.status.id }}" href="{% url 'app_timeline:delete_status' data.status.user.username data.status.id %}" >
+                            <img class="delete-button" src="{% static 'img/delete.svg' %}">
+                        </a>
+                    </div>
+                    {% endif %}
+                    <div class="pull-right">
+                        <a id="data-{{ data.status.id }}" href="{% url 'app_timeline:comment' user.username data.status.id %}" >
+                            <img class="delete-button" src="{% static 'img/comment.svg' %}">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% for comment in data.comment %}
+            <div class="comment-hover">
+                <div class="comment" id="{{ comment.id }}">
+                    <div class="header">
+                        <div>
+                            {% if comment.user.photo %}
+                            <img class="display-pic" src="{{ comment.user.photo.url }}">
+                            {% else %}
+                            <img class="display-pic" src="{% static 'img/profile_pic.svg' %}">
+                            {% endif %}
+                        </div>
+                        <div>
+                            <!-- link to profile -->
+                            <a href="{% url 'app_profile:profile_page' comment.user.username %}" >
+                                <h4 class="card-title">@{{ comment.user.username }}</h4>
+                            </a>
+                        </div>
+                    </div>
+                    <p>{{ comment.content|markdown }}</p>
+                    <p class="status-date">{{ comment.created_at }}<p/>
+                </div>
+            </div>
+            {% endfor %}
+            {% endfor %}
+            {% else %}
+            <div class="status-hover">
+                <div class="status">
+                    <h4>Hey, let's create your first post!</h4>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+{% if no_post %}
+<div class="container">
+    <div class="flex">
+        <div class="flex-item">
+            <div class="refresh">
+                {% if status_stream.has_next %}
+                <a class="infinite-more-link" href="?page={{ status_stream.next_page_number }}">More</a>
+                {% else %}
+                <a class="infinite-more-link" href="?page={{ status_stream.previous_page_number }}">Back</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}

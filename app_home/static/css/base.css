@@ -1,25 +1,30 @@
-html, body {
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
     /* margin-top: 50px; */
-    height: 100%;
-    width: 100%;
     margin:0;
+    margin-bottom: 60px;
     padding:0;
+    padding-bottom: 55px;
+    background-color: #F3F2F2;
 }
 
 .navbar-static-top {
     margin-bottom: 19px;
 }
 
-footer {
-    margin-top: 100px;
-    position:relative;
-    bottom:0;
-    width:100%;
-    height:60px;   /* Height of the footer */
-    background:whitesmoke;
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    line-height: 30px;
+    background-color: #f5f5f5;
 }
 
-footer p {
+.footer p {
     text-align: center;
     padding-top: 10px;
 }
@@ -83,24 +88,60 @@ table, th, td {
 }
 
 h1 {
-    font-family: 'Merriweather', serif;
+    font-family: 'Lobster', cursive;
     font-size: 60px;
 }
 
 h2 {
-    font-family: 'Merriweather', serif;
+    font-family: 'Montserrat', serif;
 }
 
 h3 {
-    font-family: 'Merriweather', serif;
+    font-family: 'Montserrat', serif;
     font-weight: 500;
 }
 
 h4 {
-    font-family: 'Merriweather', serif;
+    font-family: 'Montserrat', serif;
 }
 
-/* The side navigation menu */
+.navbar-default {
+    z-index: 15; /* Stay on top */
+    top: 0;
+    right:0;
+    background-color: #ef626c; 
+    overflow-x: hidden;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    padding-top: 5px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.2);
+    opacity: 0.95;
+    overflow: hidden;
+    padding:10px;
+}
+
+.navbar-default .navbar-brand {
+    color: #22181c;
+    font-size: 20px;
+}
+
+.navbar-default .navbar-brand .logo {
+    max-width: 30px;
+}
+
+.navbar-default .display-pic {
+    max-width: 0px;
+    max-height: 0px;
+    border-radius: 50%;
+    border: 0px solid whitesmoke;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
 .sidenav {
     height: 100%; /* 100% Full-height */
     width: 0; /* 0 width - change this with JavaScript */
@@ -108,20 +149,36 @@ h4 {
     z-index: 15; /* Stay on top */
     top: 0;
     right:0;
-    background-color: #111; /* Black*/
+    opacity: 0.98;   
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#22181c), to(#312f2f));
+    background-image: -webkit-repeating-linear-gradient(top, #22181c, #312f2f);
+    background-image: -webkit-repeating-linear-gradient(top, #22181c, #312f2f);
+    background-image: repeating-linear-gradient(top, #22181c, #312f2f);
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 60px; /* Place content 60px from the top */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    font-family: 'Montserrat', serif;
 }
 
 /* The navigation menu links */
 .sidenav a {
     padding: 8px 8px 8px 32px;
+    margin-bottom: 10px;
     text-decoration: none;
-    font-size: 25px;
-    color: #818181;
+    font-size: 20px;
+    color: white;
     display: block;
     transition: 0.3s
+}
+
+.sidenav #close {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-size: 20px;
+    line-height: 30px;
+    background-color: #f5f5f5;
+    color: gray;
 }
 
 /* When you mouse over the navigation links, change their color */
@@ -138,9 +195,10 @@ h4 {
     margin-left: 50px;
 }
 
-#button-header {
+.navbar-default #button-header {
     margin-top:5px;
-
+    font-size:30px;
+    cursor:pointer;
 }
 
 .button-bottom {
@@ -176,4 +234,22 @@ h4 {
 
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
+
+    .navbar-default {
+        padding: 0px;
+    }
+
+    .navbar-default .display-pic {
+        min-width: 35px;
+        min-height: 35px;
+        border-radius: 50%;
+        background-color: whitesmoke; 
+        border: 2px solid whitesmoke;    
+        margin-top: 10px;
+        margin-right: 10px;
+    }
+
+    .navbar-default #button-header {
+        font-size: 0;
+    }
 }

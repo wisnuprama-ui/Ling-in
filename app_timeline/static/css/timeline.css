@@ -11,24 +11,48 @@
     padding: 10px 10px;
     box-sizing: border-box;
     position: relative;
+    height: 100px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
 }
 
-#input-section form .content-form-textarea {
+#input-section form .status-form-textarea {
     padding: 15px;
     border: 1px solid #ccc;
-    border-radius: 3px;
+    border-radius: 2rem;
     margin-bottom: 10px;
     width: 100%;
     box-sizing: border-box;
     color: #2C3E50;
     font-size: 14px;
+    max-height: 50px;
+    overflow: hidden;
+    -webkit-transition: height .3s ease-out;
+    -moz-transition: height .3s ease-out;
+    -o-transition: height .3s ease-out;
+    transition: height .3s ease-out;
+}
+
+#input-section form .submit-button {
+    display:none;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 #input-section form img {
     border-radius: 50%;
-    max-width: 75px;
+    max-width: 50px;
+    max-height: 50px;
     margin-left: 10px;
-    margin-top: 15px;
+    margin-top: 0px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 #status-stream .stream {
@@ -39,34 +63,147 @@
     position: relative;
     z-index: 1;
     background: white;
-    box-shadow: 0 1px 2px 0.5px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 1px 5px 0.5px rgba(0, 0, 0, 0.4);
 }
 
 #status-stream .stream .status {
     width: 100%;
     padding: 20px;
-    box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0.5px 2px 0.5px rgba(0, 0, 0, 0.5);
     box-sizing: border-box;
+    margin-top: 5px;
+    -webkit-border-radius: 0 0px 2px 2px;
+    -moz-border-radius: 0 0px 2px 2px;
+    -o-border-radius: 0 0px 2px 2px;
+    border-radius: 0 0px 2px 2px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
 }
 
-#status-stream .stream .status .header {
+#status-stream .stream .comment {
+    width: 75%;
+    padding: 20px;
+    margin-left:25%;
+    box-shadow: 0 0.5px 2px 0.5px rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    margin-top: 5px;
+    -webkit-border-radius: 0 0px 2px 2px;
+    -moz-border-radius: 0 0px 2px 2px;
+    -o-border-radius: 0 0px 2px 2px;
+    border-radius: 0 0px 2px 2px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+#status-stream .stream .status-hover:hover .status {
+    width: 100%;
+    padding: 30px;
+    box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.4);
+    box-sizing: border-box;
+    margin-top: 5px;
+}
+
+#status-stream .stream .comment-hover:hover .comment {
+    width: 75.8%;
+    margin-left: 24.2%;
+    box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.4);
+}
+
+
+#status-stream .stream .header {
     display: flex;
     margin-bottom:15px;
 }
 
-#status-stream .stream .status .display-pic {
-    border-radius: 5%;
-    max-width: 35px;
+#status-stream .stream .display-pic {
+    border-radius: 10%;
+    width: 35px;
     margin-right: 10px;
 }
 
-#status-stream .stream .status p {
+#status-stream .stream .status-date {
+    color: lightgrey;
+}
+
+#status-stream .stream .delete-button {
+    position: relative;
+    width: 0px;
+    margin-right: 0px;
+    padding-bottom: 10px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+#status-stream .stream .status:hover .delete-button {
+    width: 30px;
+}
+
+#status-stream .stream .status:hover .delete-button::selection {
+    
+}
+
+#status-stream .stream p {
     white-space: normal;
     word-break: break-all;
+}
+
+.stream .refresh {
+    width: 100%;
+    margin-top:25px;
+    padding: 10px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 1, 0.4);
+    box-sizing: border-box;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 18px;
+    z-index: -1;
+}
+
+.flex-item .refresh a {
+    color: lightblue;
+}
+
+.flex-item .refresh a:link {
+    text-decoration: none;
+}
+
+.flex-item .refresh a:visited {
+    text-decoration: none;
+}
+
+.flex-item .refresh a:hover {
+    text-decoration: none;
+    color: lightskyblue;
+}
+
+.status-hover h4 {
+    text-align: center;
 }
 
 @media only screen and (max-width: 768px) {    
     #input-section form img {
         max-width: 0;
+    }
+
+    #input-section form {
+        max-width: 90%;
+        padding-top:0px;
+    }
+
+    #input-section form .status-form-textarea {
+        max-height: 45px;
+    }
+
+
+
+    #status-stream .stream {
+        max-width: 90%;
     }
 }

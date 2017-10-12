@@ -1,0 +1,72 @@
+{% extends "app_home/layout/base.html" %}
+{% load static %}
+{% block stylesheet%}
+<!-- @TODO ganti # dengan nama css yang diletakkan di static/css/ app_dashboard -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/stats.css' %}" /> 
+{% endblock %}
+{% block content %}
+<!-- kreasinya disini, nanti kalo butuh referensi liat di app_timeline/templates/index_timeline.html -->
+<section class="stats-stream" id="stats-stream">
+    <div class="container">
+        <div class="flex">
+            <div class="stream">
+                <div class="flex-item">
+                    <h1><b>Statistic</b></h1>
+                    <div class="stats">
+                        <div class="flex-center">
+                            {% if user.photo %}
+                            <img class="display-pic" src="{{ user.photo.url }}">
+                            {% else %}
+                            <img class="display-pic" src="{% static 'img/profile_pic.svg' %}">
+                            {% endif %}
+                            <a href="{% url 'app_profile:profile_page' user.username %}"><h2>@{{ user.username }}</h2></a>
+                            <div class="statistic">
+                                <p><b>Feed</b> {{ len_status }} Posts</p>
+                                <p><b>Friends</b> {{ jumlah_teman }} People</p>
+                            </div>                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <h2><b>Latest Post</b></h2>
+                            <div class="stats-hover">
+                                <div class="stats" id="{{ latest_status.id }}">
+                                    {% if latest_status %}
+                                    <p>{{ latest_status.content }}</p>
+                                    <p id="status-date">{{ latest_status.created_at }}</p>
+                                    {% else %}
+                                    <center><h3><b>No Post</b></h3></center>
+                                    {% endif %}
+                                    <div class="pull-right">
+                                            <a id="data-{{ latest_status.id }}" href="{% url 'app_timeline:delete_status' 
+                                                                                    latest_status.user.username latest_status.id %}" >
+                                            </a>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <h2><b>Latest Friends </b></h2>
+                            <div class="stats-hover">
+                                <div class="stats">
+                                    {% if latest_friends %}
+                                    {% for friend in latest_friend %}
+                                    <div class="stats">
+                                            <p>{{ friend.name }}</p>
+                                            <p>{{ friend.url }}</p>
+                                    </div>
+                                    {% endfor %}
+                                    {% else %}
+                                    <center><h3><b>Let's make friends!!</b></h3></center>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -9,7 +9,7 @@
     <content>
         <div class="container">
             <div class="flex">
-                <div>
+                <div id="signup-section" class="signup-section">
                     <h2 class="font-weight-bold font-italic text-center">{{ TITLE }}</h2><br>
                     <h3 class="font-weight-bold text-center">{{ message }}</h3>
                     <br>
@@ -31,6 +31,13 @@
                             <br>
                         </div>
                         {% endfor %}
+                        <div class="flex-item">
+                            <b>Birth Dates</b>
+                            <br>
+                            <input class="signup-form-date" type="date" name="date" id="date" required="required"/>
+                            <br>
+                            <br>    
+                        </div>
                         <input id="submit" type="submit" class="btn btn-lg btn-block btn-info" value="Create">
                         <br>
                     </form>

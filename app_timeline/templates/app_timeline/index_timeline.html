@@ -1,14 +1,14 @@
 {% extends "app_home/layout/base.html" %}
 {% load static %}
-{% load markdown_deux_tags %}
 {% block stylesheet %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/timeline.css' %}" />
 {% endblock %}
 {% block content %}
 <section class="input-section" id="input-section">
-    <div class="container">
+    <div class="container" onscroll="minimizeStatusForm()">
         <div class="flex">
-            <form id="form" method="POST" action="{% url 'app_timeline:add_status' user.username %}">
+            <form class="form" id="form" method="POST" action="{% url 'app_timeline:add_status' user.username %}"
+            onclick="growStatusForm()">
                 {% if messages %}
                     <div class="messages">
                         {% for message in messages %}
@@ -29,8 +29,9 @@
                         {{ status_form }}                        
                     </div>
                 </div>
-                <div class="button">
-                    <input id="submit" type="submit" class="btn btn-lg btn-info pull-right" value="Post">
+                <div class="pull-right submit-button">
+                    <span id="cal_char">350</span>
+                    <input id="submit" type="submit" class="btn btn-lg btn-info" value="Post">
                 </div>
                 <br>
             </form>
@@ -41,33 +42,40 @@
     <div class="container">
         <div class="flex">
             <div class="stream">
-                {% if status_post %}
-                    {% for data in status_post %}
-                        <div class="flex-item">
-                            <!-- status -->
-                            <div class="status" id="{{ data.id }}">
-                                <div class="header">
-                                    <div class="">
-                                        {% if data.user.photo %}
-                                        <img class="display-pic" src="{{ data.user.photo.url }}">
-                                        {% else %}
-                                        <img class="display-pic" src="{% static 'img/profile_pic.svg' %}">
-                                        {% endif %}
-                                    </div>
-                                    <div class="">
-                                    <!-- link to stats or dashboard of this username -->
-                                        <a href="#" >
-                                            <h4 class="card-title">@{{ data.user.username }}</h4>
-                                        </a>
-                                    </div>
-                                </div>
-                                <p>{{ data.content|markdown }}</p>
-                            </div>
-                        </div>
-                    {% endfor %}
-                {% endif %}
+            {% include "app_timeline/timeline_stream.html" %}
             </div>
         </div>
     </div>
 </section>
+{% endblock %}
+{% block script %}
+<script type="application/javascript">
+    const minSc = window.matchMedia( "(min-width: 768px)");
+    var clicked = false;
+    function growStatusForm() {
+        clicked = true;
+        $('#input-section form').css('height','auto');$('#input-section form .submit-button').css('display','block');
+        $('#input-section form .status-form-textarea').animate({'max-height':'100%','border-radius':'1rem'});
+        if(minSc.matches){$('#input-section form img').css({'max-width':'75px', 'max-height':'75px'})}
+    }
+
+    $(document).scroll(function minimizeStatusForm(){
+        if($(this).scrollTop() > 100){
+            $('#input-section form').css('height', '100px');
+            $('#input-section form .submit-button').css('display', 'none');
+            $('#input-section form .status-form-textarea').css({'max-height':'50px', 'border-radius':'2rem'});
+            if(minSc.matches){
+            $('#input-section form img').css({'max-width':'50px','max-height':'50px'});
+            }
+        } //else if (clicked) {
+        //     growStatusForm()
+        // }
+    })
+
+    function calculateChar() {
+        var input_form = document.getElementById('status-form-textarea').value;
+        var value_length = input_form.length + 1;
+        document.getElementById('cal_char').innerHTML = 351 - value_length;
+    }
+</script>
 {% endblock %}

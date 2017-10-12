@@ -1,14 +1,26 @@
-{% load staticfiles %}
+{% load static %}
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
-      <div id="mySidenav" class="sidenav">
-          <a href="{}">Dashboard</a>
+      <div class="navbar-brand">
+        <img class="logo" src="https://cdn1.iconfinder.com/data/icons/web-3/512/link-128.png">
+        Ling-In
+      </div>
+      <div id="sidenav" class="sidenav">
+          <a href="{% url 'app_dashboard:stats' user.username %}">Dashboard</a>
           <a href="{% url 'app_timeline:timeline_page' user.username %}">Timeline</a>
           <a href="{% url 'app_profile:profile_page' user.username %}">Profile</a>
-          <a href="{% url 'app_timeline:timeline_page' user.username %}">Friends</a>
+          <a href="{% url 'app_friend:index' user.username %}">Friends</a>
           <a href="{% url 'app_home:homepage' %}" class="button-buttom">Sign out</a>
-          <a href="javascript:void(0)" class="" onclick="closeNav()">&times; Close</a>
-      </div>
-      <span id="button-header" class="pull-right" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+          <a href="javascript:void(0)" id="close" onclick="closeNav()">&times; Close</a>
+        </div>
+      <div class="pull-right">
+      <span id="button-header" class="flex-item" onclick="openNav()">
+          {% if user.photo %}
+          <img class="display-pic" src="{{ user.photo.url }}">&#9776;
+          {% else %}
+          <img class="display-pic" src="{% static 'img/profile_pic.svg' %}">&#9776;
+          {% endif %}
+      </span>
+    </div>
   </div>
 </nav>

@@ -1,0 +1,52 @@
+{% extends "app_home/layout/base.html" %}
+{% load static %}
+{% block stylesheet %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/app_friend.css' %}" />
+{% endblock %}
+{% block content %}
+<hr/>
+<section name="input-list" id="input-list">
+    <div class="container">
+        <form id="form" method="POST" action="{% url 'app_friend:add_friend' user.username %}">
+            <h2>Add Your Friend</h2>
+            {% csrf_token %}
+            {{ friend_form }}
+            <input id="submit" type="submit" class="btn btn-lg btn-block btn-info" value="Submit">
+            <br>
+        </form>
+    </div>
+</section>
+<section name="my-list" id="my-list">
+    <div class="container">
+        <h2 class="my-list-title">My Friend</h2>
+        <div class="flex">
+            {% if friends %}
+                {% for data in friends %}
+                    <div class="flex-item">
+                        <div class="to-do-list">
+                            <div class="to-do-list-title">
+                                {{data.name}}
+                            </div>
+                            <div class="to-do-list-date-added">
+                                {{data.created_at}}
+                            </div>
+                            <div class="to-do-list-description">
+                                <a href= "{{data.url }}" >{{data.url }}</a>
+                            </div>
+                            <div class="to-do-list-delete">
+                                <a href="{% url 'app_friend:delete_friend' user.username data.id %}">
+                                    <div class="to-do-list-delete-button" data-id="{{data.id}}">Delete</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+            <div class="alert alert-danger text-center">
+                <strong>Oops!</strong> Tidak ada data Todo.
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}       

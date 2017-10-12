@@ -9,7 +9,7 @@ import app_profile.models as app_profile_models
 # Create your tests here.
 class AppHomeTest(TestCase):
 
-    username = 'anonotexist'
+    username = 'Anonymous'
     user_model = app_profile_models.UserProfile
 
     def setUp(self):
@@ -31,7 +31,7 @@ class AppHomeTest(TestCase):
     def test_home_url(self):
 
         url = reverse('app_home:homepage',args=[])
-        self.assertEqual(url, '/home/')
+        self.assertEqual(url, '/')
 
         url = reverse('app_home:account',args=[])
         self.assertEqual(url, '/account/')
@@ -43,7 +43,7 @@ class AppHomeTest(TestCase):
         self.assertEqual(url, '/account/signup/')
 
     def test_home_index_func(self):
-        found = resolve('/home/')
+        found = resolve('/')
         self.assertEqual(found.func, index)
 
     def test_home_signup_account_func(self):
@@ -70,7 +70,7 @@ class AppHomeTest(TestCase):
 
         respone = Client().post('/account/login/', {'username':username_not_exist})
         self.assertEqual(respone.status_code, 302)
-        self.assertEqual('/home/', respone.url)
+        self.assertEqual('/', respone.url)
 
     def test_home_signup_success(self):
         pass

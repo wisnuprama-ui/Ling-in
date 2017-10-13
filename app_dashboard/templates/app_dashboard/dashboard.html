@@ -47,21 +47,21 @@
                         </div>
                         <div class="col-sm-4">
                             <h2><b>Latest Friends </b></h2>
-                            <div class="stats-hover">
-                                <div class="stats">
-                                    {% if latest_friends %}
-                                    {% for friend in latest_friend %}
+                            <div class="flex-item">
+                                {% if latest_friends %}
+                                {% for friend in latest_friends %}
+                                <div class="stats-hover">
                                     <div class="stats">
-                                            <p>{{ friend.name }}</p>
-                                            <p>{{ friend.url }}</p>
+                                        <p>{{ friend.name }}</p>
+                                        <p><a href="{{ friend.url }}">{{ friend.url }}</a></p>
+                                        <p id="status-date">{{ friend.created_at }}</p>
                                     </div>
-                                    {% endfor %}
-                                    {% else %}
-                                    <center><h3><b>Let's make friends!!</b></h3></center>
-                                    {% endif %}
                                 </div>
+                                {% endfor %}
+                                {% else %}
+                                <center><h3><b>Let's make friends!!</b></h3></center>
+                                {% endif %}
                             </div>
-
                         </div>
                       </div>
                 </div>

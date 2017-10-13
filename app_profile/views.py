@@ -32,11 +32,13 @@ def edit(request, username=None):
 	template_name = 'app_profile/profile_edit.html'
 	return render(request, template_name, response)
 
-def post_custom_profile(request):
 
-	if request.method == "POST" and form.is_valid():
-		response['user'] = request.POST['user']
-		newUserProfile = UserProfile(UserProfile, username=username)
-		newUserProfile.save()
-		template_name = '/app_profile/profile_edit.html'
-		return render(request, template_name, response)
+# temporary down
+# def post_custom_profile(request):
+
+# 	if request.method == "POST" and form.is_valid():
+# 		response['user'] = request.POST['user']
+# 		newUserProfile = UserProfile(UserProfile, username=username)
+# 		newUserProfile.save()
+# 		template_name = '/app_profile/profile_edit.html'
+# 		return render(request, template_name, response)

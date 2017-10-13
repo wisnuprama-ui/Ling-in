@@ -9,7 +9,7 @@ import app_profile.models as app_profile_models
 # Create your tests here.
 class AppHomeTest(TestCase):
 
-    username = 'anonotexist'
+    username = 'Anonymous'
     user_model = app_profile_models.UserProfile
 
     def setUp(self):

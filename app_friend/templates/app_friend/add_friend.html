@@ -1,8 +1,9 @@
-{% extends "app_friend/layout/base.html" %}
-
+{% extends "app_home/layout/base.html" %}
+{% load static %}
+{% block stylesheet %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/app_friend.css' %}" />
+{% endblock %}
 {% block content %}
-
-<h1 class="main-title">ADD FRIEND</h1>
 <hr/>
 <section name="input-list" id="input-list">
     <div class="container">
@@ -48,5 +49,4 @@
         </div>
     </div>
 </section>
-
 {% endblock %}       

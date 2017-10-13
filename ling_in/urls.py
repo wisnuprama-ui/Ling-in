@@ -31,6 +31,5 @@ urlpatterns = [
     url(r'^', include(app_dashboard, namespace='app_dashboard')),
     url(r'^', include(app_friend, namespace='app_friend')),
     url(r'^', include(app_profile, namespace='app_profile')),
-    url(r'^', RedirectView.as_view(permanent='True', url='/home/'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)\
     + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

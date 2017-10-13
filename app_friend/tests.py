@@ -17,10 +17,9 @@ from selenium.common.exceptions import ErrorInResponseException
 
 class AppFriendTest(TestCase):
 
-    username = 'anon'
-    user_profile = None
-
     def setUp(self):
+        self.username = 'Anonymous'
+
         self.user_profile = app_profile_models.UserProfile(
             username=self.username,
             first_name=self.username,
@@ -115,7 +114,7 @@ class AppFriendTest(TestCase):
 
 class AppFriendFunctional(TestCase):
 
-        username = 'anon'
+        username = 'Anonymous'
         user_profile = None
         selenium = None
 
@@ -146,10 +145,10 @@ class AppFriendFunctional(TestCase):
             self.selenium.quit()
             super(AppFriendFunctional, self).tearDown()
 
-        def test_timeline_input_status(self):
+        def test_friend_input_status(self):
             selenium = self.selenium
             # Opening the link we want to test
-            selenium.get('http://127.0.0.1:8000/%s/friends/' % (self.user_profile.username))
+            selenium.get('http://127.0.0.1:8000/%s/friends/' % (self.username))
             isi_nama = 'namaku ada lima'
             isi_url = 'https://www.google.com'
 

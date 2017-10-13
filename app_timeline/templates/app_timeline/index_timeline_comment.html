@@ -1,5 +1,6 @@
 {% extends "app_home/layout/base.html" %}
 {% load static %}
+{% load markdown_deux_tags %}
 {% block stylesheet %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/timeline.css' %}" />
 {% endblock %}
@@ -7,7 +8,39 @@
 <section class="input-section" id="input-section">
     <div class="container" onscroll="minimizeStatusForm()">
         <div class="flex">
-            <form class="form" id="form" method="POST" action="{% url 'app_timeline:add_status' user.username %}"
+            <div class="status-stream" id="status-stream" style="margin-top:150px">
+                <div class="stream">
+                    <div class="status-hover">
+                        <div class="status" id="{{ status.id }}">
+                            <div class="header">
+                                <div>
+                                    {% if status.user.photo %}
+                                    <img class="display-pic" src="{{ status.user.photo.url }}">
+                                    {% else %}
+                                    <img class="display-pic" src="{% static 'img/profile_pic.svg' %}">
+                                    {% endif %}
+                                </div>
+                                <div>
+                                    <!-- link to profile -->
+                                    <a href="{% url 'app_profile:profile_page' status.user.username %}" >
+                                        <h4 class="card-title">@{{ status.user.username }}</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <p>{{ status.content|markdown }}</p>
+                            <p class="status-date">{{status.created_at}}<p/>
+                            {% if status.user == user %}
+                            <div class="pull-right">
+                                <a id="status-{{ status.id }}" href="{% url 'app_timeline:delete_status' status.user.username status.id %}" >
+                                    <img class="delete-button" src="{% static 'img/delete.svg' %}">
+                                </a>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form id="form" method="POST" action="{% url 'app_timeline:comment_status' user.username status.id %}"
             onclick="growStatusForm()">
                 {% if messages %}
                     <div class="messages">
@@ -26,7 +59,7 @@
                     </div>
                     <div class="col-sm-11">
                         {% csrf_token %}
-                        {{ status_form }}                        
+                        {{ comment_form }}                        
                     </div>
                 </div>
                 <div class="pull-right submit-button">
@@ -35,15 +68,6 @@
                 </div>
                 <br>
             </form>
-        </div>
-    </div>
-</section>
-<section class="status-stream" id="status-stream">
-    <div class="container">
-        <div class="flex">
-            <div class="stream">
-            {% include "app_timeline/timeline_stream.html" %}
-            </div>
         </div>
     </div>
 </section>
@@ -58,7 +82,6 @@
         $('#input-section form .status-form-textarea').animate({'max-height':'100%','border-radius':'1rem'});
         if(minSc.matches){$('#input-section form img').css({'max-width':'75px', 'max-height':'75px'})}
     }
-
     $(document).scroll(function minimizeStatusForm(){
         if($(this).scrollTop() > 100){
             $('#input-section form').css('height', '100px');
@@ -76,6 +99,6 @@
         var input_form = document.getElementById('status-form-textarea').value;
         var value_length = input_form.length + 1;
         document.getElementById('cal_char').innerHTML = 351 - value_length;
-    }
+    }  
 </script>
 {% endblock %}

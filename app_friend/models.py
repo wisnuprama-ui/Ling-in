@@ -19,8 +19,8 @@ class Friend(models.Model):
         )
 
 class Friendship(models.Model):
-    friend = models.ForeignKey(Friend)
-    user = models.ForeignKey(UserProfile)
+    friend = models.ForeignKey(Friend, models.CASCADE)
+    user = models.ForeignKey(UserProfile, models.CASCADE)
 
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)

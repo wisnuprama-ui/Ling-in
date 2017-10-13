@@ -10,15 +10,15 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import ErrorInResponseException
+from selenium.webdriver.common.by import By
 
 # Create your tests here.
 
 class AppTimelineTest(TestCase):
 
-    username = 'anon'
-    user_profile = None
-
     def setUp(self):
+        self.username = 'Anonymous'
+        
         self.user_profile = app_profile_models.UserProfile(
             username=self.username,
             first_name=self.username,
@@ -153,14 +153,10 @@ class AppTimelineTest(TestCase):
         html_response = response.content.decode('utf8')
         self.assertNotIn(test, html_response)
 
-def AppTimelineFunctional(TestCase):
-
-    username = 'anon'
-    user_profile = None
-    selenium = None
+class AppTimelineFunctional(TestCase):
 
     def setUp(self):
-        self.username = 'anon'
+        self.username = 'Anonymous'
         self.user_profile = app_profile_models.UserProfile(
             username=self.username,
             first_name=self.username,
@@ -171,7 +167,7 @@ def AppTimelineFunctional(TestCase):
             birth_place=self.username,
             gender=app_profile_models.UserProfile.MALE,
             description=self.username + self.username + self.username
-        );
+        )
         self.user_profile.save()  # save
 
         chrome_options = Options()
@@ -190,9 +186,10 @@ def AppTimelineFunctional(TestCase):
     def test_timeline_input_status(self):
         selenium = self.selenium
         # Opening the link we want to test
-        selenium.get('http://127.0.0.1:8000/%s/timeline/' % (self.user_profile.username))
+        selenium.get('http://127.0.0.1:8000/%s/timeline/' % (self.username))
         isi_status = 'ini statusku, kalo kamu?'
 
+        self.selenium.find_element_by_id('status-form-textarea').click()
         status = selenium.find_element_by_id('status-form-textarea')
         submit = selenium.find_element_by_id('submit')
         status.send_keys(isi_status)

@@ -4,9 +4,9 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from ling_in import strings
-from .models import Status
+from .models import Status, Comment
 from app_profile.models import UserProfile
-from .forms import StatusPostForm
+from .forms import StatusPostForm, CommentForm
 
 # Create your views here.
 
@@ -14,6 +14,21 @@ response = {
     'TITLE': strings.TITLE,
     'YEAR': strings.YEAR,
 }
+
+class StatusComment:
+    """
+    without dictionary
+    Status is an object and comment must be an iterable object like list or tuple
+    """
+    def __init__(self, status, comment=list()):
+        self.status = status
+        self.comment = comment
+    
+    def __str__(self):
+        return "%s: %s" % (self.status, len(self.comment))
+    
+    def __repr__(self):
+        return "%s: %s" % (self.status, len(self.comment))
 
 def index(request, username=None):
     """
@@ -52,6 +67,7 @@ def index(request, username=None):
     response['status_stream'] = status_stream
     return render(request, template_name, response)
 
+
 def get_queryset(user):
     """
 
@@ -59,7 +75,27 @@ def get_queryset(user):
     :return:
     """
     model = Status
-    return model.objects.filter(user=user).order_by('-created_at')
+    status_by_user = model.objects.all().order_by('-created_at') #for now we grab all status
+
+    if(len(status_by_user) > 50):
+        status_by_user = status_by_user[:50]
+
+    status_with_comment = []
+    ## this is bad ##
+    for st in status_by_user:
+        comment_for_this_st = Comment.objects.filter(status=st).order_by('-created_at')
+
+        if(len(comment_for_this_st) > 10):
+            comment_for_this_st = comment_for_this_st[:10]
+
+        status_with_comment.append(
+            StatusComment(
+                status=st, 
+                comment=comment_for_this_st
+            )
+        )
+
+    return status_with_comment
 
 
 def add_status(request, username=None):
@@ -98,3 +134,37 @@ def delete_status(request, username=None, status_id=None):
     user = get_object_or_404(UserProfile, username=username)
     get_object_or_404(model, pk=status_id).delete()
     return HttpResponseRedirect('/%s/timeline/' % (user.username))
+
+def index_comment(request, username=None, status_id=None):
+    
+    user = get_object_or_404(UserProfile, username=username)
+    status = get_object_or_404(Status, pk=status_id)
+
+    response['page_title'] = 'Comment'
+    response['user'] = user
+    response['status'] = status
+    response['comment_form'] = CommentForm
+    template_name = 'app_timeline/index_timeline_comment.html'
+    return render(request, template_name, response)
+
+def comment_status(request, username=None, status_id=None):
+    # get commentator and status that commented by commentator
+    user_commentator = get_object_or_404(UserProfile, username=username)
+    status_commented = get_object_or_404(Status, pk=status_id)
+
+    model = Comment
+    form = CommentForm(request.POST or None)
+
+    if(request.method == 'POST' and form.is_valid()):
+        content = request.POST['content']
+        # create comment
+        model(user=user_commentator, status=status_commented, content=content).save()
+        # messages.success(request, "Success")
+
+        return HttpResponseRedirect('/%s/timeline/' % (username))
+
+    else:
+        return HttpResponseRedirect('/%s/timeline/' % (username))
+    
+
+    

@@ -6,19 +6,6 @@ UnitTest:
     image: python:3.6
     stage: test
     before_script:
-        - pip install -r requirements.txt
-        - python manage.py makemigrations
-        - python manage.py migrate
-        - python manage.py collectstatic --no-input
-    when: on_success
-    script:
-        - coverage run --include='app_*/*' manage.py test
-        - coverage report -m
-
-FunctionalTest:
-    image: python:3.6
-    stage: test
-    before_script:
         - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
         - echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list
         - pip install -r requirements.txt
@@ -30,12 +17,12 @@ FunctionalTest:
         - wget https://chromedriver.storage.googleapis.com/2.32/chromedriver_linux64.zip
         - unzip chromedriver_linux64.zip
         - python manage.py collectstatic --no-input
+        - echo "from app_profile.models import UserProfile;from django.utils import timezone;UserProfile.objects.filter(username='Anonymous').delete(); username = 'Anonymous';UserProfile(username=username,first_name=username,middle_name=username,last_name=username,email=username + '@' + username + '.com',birth_date=timezone.now(),birth_place=username,gender=UserProfile.MALE).save()" | python manage.py shell
         - python manage.py runserver 8000 &
     when: on_success
     script:
-        - python manage.py test
-    except:
-        - master
+        - coverage run --include='app_*/*' manage.py test
+        - coverage report -m
 
 Deployment:
     image: ruby:2.4
@@ -47,6 +34,7 @@ Deployment:
         - dpl --provider=heroku --app=$HEROKU_APPNAME --api-key=$HEROKU_APIKEY
         - export HEROKU_API_KEY=$HEROKU_APIKEY
         - heroku run --app $HEROKU_APPNAME migrate
+        - echo "from django.contrib.auth.models import User; User.objects.filter(email='admin@example.com').delete(); User.objects.create_superuser('admin', 'admin@example.com', 'tralala123')" | python manage.py shell
     environment:
         name: production
         url: $HEROKU_APP_HOST

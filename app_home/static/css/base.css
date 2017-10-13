@@ -125,7 +125,10 @@ h4 {
 .navbar-default .navbar-brand {
     color: #22181c;
     font-size: 20px;
-    
+}
+
+.navbar-default .navbar-brand .logo {
+    max-width: 30px;
 }
 
 .navbar-default .display-pic {
@@ -143,7 +146,7 @@ h4 {
     height: 100%; /* 100% Full-height */
     width: 0; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
-    z-index: 15; /* Stay on top */
+    z-index: 100; /* Stay on top */
     top: 0;
     right:0;
     opacity: 0.98;   

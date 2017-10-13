@@ -15,7 +15,7 @@ textarea {
     resize:none
 }
 section{
-  min-height: 600px;
+  min-height: 320px;
 }
 .main-title{
   -webkit-animation: colorchange 1s infinite;
@@ -39,8 +39,8 @@ section{
   background: linear-gradient(to bottom right, #c13288, #7212cc);
 }
 #input-list form{
-  width: 1080px;
-  height: 500px;
+  width: 768px;
+  height: 240px;
   margin: 50px auto;
   text-align: center;
   position: relative;
@@ -61,12 +61,11 @@ section{
   margin-bottom: 10px;
 }
 #input-list form > .todo-form-input, #input-list form > .todo-form-textarea{
-  padding: 366px;
+  padding: 15px;
     border: 1px solid #ccc;
-    border-radius: 30px;
-    margin-bottom: 100px;
-    width: 300%;
-    height: 150%;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    width: 100%;
     box-sizing: border-box;
     color: #2C3E50;
     font-size: 26px;

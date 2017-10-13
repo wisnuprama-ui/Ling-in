@@ -35,12 +35,13 @@ def get_query_friends(user):
 def validate_url(url=str()):
     try:
         # get request for 0.8 sec
-        resp = requests.get(url, timeout=0.8)
+        resp = requests.get(url, timeout=5)
+        print(resp.status_code)
         if(resp.status_code < 400):
             return True
 
     except requests.exceptions.MissingSchema:
-        # the url is not valid --> regex
+        # the uxrl is not valid --> regex
         return False
     except requests.exceptions.ReadTimeout:
         # time-out: too long to responses

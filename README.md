@@ -1,6 +1,6 @@
 # Ling In - PPW F 01
 
-visit us https://ling-in.herokuapp.com
+visit us http://lingin.herokuapp.com/Anonymous/
 
 ### Status
 [![pipeline status](https://gitlab.com/ppwf01/ling-in/badges/master/pipeline.svg)](https://gitlab.com/ppwf01/ling-in/commits/master)
@@ -15,9 +15,10 @@ visit us https://ling-in.herokuapp.com
 | Wisnu Pramadhitya Ramadhan | 1606918055 |
 
 
-R   G   B
-189 75  79 (RED)
-173 180 179 (LIGHT GRAY)
-243 242 242 (LIGHT BLUE GRAY)
-66 187 185 (BLUE GREEN)
-87 106 125 (NAVY)
+### color
+R   |  G  |   B  | Color |
+189 | 75  | 79   |(RED) |
+173 | 180 | 179  |(LIGHT GRAY) |
+243 | 242 | 242  |(LIGHT BLUE GRAY) |
+66  | 187 | 185  |(BLUE GREEN) |
+87  | 106 | 125  |(NAVY) |

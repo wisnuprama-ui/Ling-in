@@ -106,7 +106,7 @@ h4 {
 }
 
 .navbar-default {
-    z-index: 15; /* Stay on top */
+    z-index: 100;
     top: 0;
     right:0;
     background-color: #ef626c; 
@@ -128,7 +128,14 @@ h4 {
 }
 
 .navbar-default .navbar-brand .logo {
-    max-width: 30px;
+    margin-top: -10px;
+    max-width: 40px;
+    border: 2px solid whitesmoke;
+    border-radius: 50%;
+}
+
+.navbar-default .navbar-brand h1 {
+    font-size: 20px;
 }
 
 .navbar-default .display-pic {
@@ -143,10 +150,10 @@ h4 {
 }
 
 .sidenav {
-    height: 100%; /* 100% Full-height */
-    width: 0; /* 0 width - change this with JavaScript */
-    position: fixed; /* Stay in place */
-    z-index: 15; /* Stay on top */
+    height: 100%; 
+    width: 0; 
+    position: fixed; 
+    z-index: 100; 
     top: 0;
     right:0;
     opacity: 0.98;   
@@ -154,13 +161,13 @@ h4 {
     background-image: -webkit-repeating-linear-gradient(top, #22181c, #312f2f);
     background-image: -webkit-repeating-linear-gradient(top, #22181c, #312f2f);
     background-image: repeating-linear-gradient(top, #22181c, #312f2f);
-    overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 60px; /* Place content 60px from the top */
-    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.5s;
     font-family: 'Montserrat', serif;
 }
 
-/* The navigation menu links */
+
 .sidenav a {
     padding: 8px 8px 8px 32px;
     margin-bottom: 10px;
@@ -181,12 +188,12 @@ h4 {
     color: gray;
 }
 
-/* When you mouse over the navigation links, change their color */
+
 .sidenav a:hover, .offcanvas a:focus{
     color: #f1f1f1;
 }
 
-/* Position and style the close button (top right corner) */
+
 .sidenav .closebtn {
     position: absolute;
     top: 0;

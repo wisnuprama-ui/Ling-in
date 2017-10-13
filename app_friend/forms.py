@@ -10,7 +10,7 @@ class FriendForm(forms.Form):
         'class':'input-form-name',
         'id':'input-form-name',
         'placeholder':'Who is your friend?',
-        'cols': 100,
+        'cols': 50,
         'rows': 1,
     }
 
@@ -19,7 +19,7 @@ class FriendForm(forms.Form):
         'class':'input-form-name',
         'id':'input-form-url',
         'placeholder':'What is your friend\'s url',
-        'cols': 100,
+        'cols': 50,
         'rows': 1,
     }
 
@@ -30,5 +30,6 @@ class FriendForm(forms.Form):
 
     url = forms.URLField(label='URL',required=True,
                          widget=forms.URLInput(attrs=url_attrs),
-                         error_messages=error_message)
+                         error_messages=error_message,
+                         initial='https://')
     

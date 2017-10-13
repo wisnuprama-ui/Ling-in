@@ -4,13 +4,50 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'css/profile.css'%}">
 {% endblock %}
 {% block content %}
+
+<div class="container">
+    <h1>Edit Profile</h1>
+</div>
+<form method="POST" action="" style="margin-top: 20px; margin-left:20px">
+    {% csrf_token %}
+    <!-- <input type='hidden' name='csrfmiddlewaretoken' value='A0AfF6yWE42VQOahgwFQYaNn8op8yset3MpVqhAUxLXZMK7o3hnvXE5a4m4Q5zsQ' /> -->
+    <div class="container">
+        <div class="row">
+            <div class="formEdit">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-6    ">
+                    <input type="hidden" name="id" value="1">
+                    <h3>Name:</h3>
+                    <input type="text" name="user" value= "user.first_name" size="30">
+                    <input type="text" name="user" value= "user.middle_name" size="30">
+                    <input type="text" name="user" value= "user.last_name" size="30">
+                    <h3>Birthday:</h3>
+                    <input type="date" name="birthday" value="user.birth_date" size="20">
+                    <h3>Gender:< /h3>
+                    <input type="radio" name="gender" value="Male">Male
+                    <input type="radio" name="gender" value="Female" checked>Female        
+                    <h3>Email:</h3>
+                    <input type="email" name="email" value="user.email" size="30">
+                    <h3>Expertise:</h3>
+                    <input type="text" name="expertise" value="user.expertise" size="50">
+                </div>
+                <div class="col-sm-3" style="margin-top: 15px">
+                    <h3>Description:</h3>
+                    <textarea type="paragraph_text" name="description" cols="50" rows="10">Antique Expertise</textarea>
+                    
+                    <button type="submit" class="btn btn-primary float" id="button" style="margin-top: 20px">Submit</button>
+                    <a class="btn btn-primary float" style="margin-top: 20px; margin-left: 10px" id="button" href="">Cancel</a>    
+                    
+                </div>
+            </div>    
+        </div>
+    </div>
+</form>
+
+
+
+
+
+
+
 {% endblock %}
-
-<body>
-
-
-
-
-
-
-

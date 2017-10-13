@@ -153,8 +153,7 @@ env/
 
 #Ignore files for Lab1
 /*/migrations/__pycache__
-/*/migrations/0*
 /db.sqlite3
 /static/
-/media/
+/media/image/
 /chromedriver

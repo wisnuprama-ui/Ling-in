@@ -34,19 +34,13 @@ def get_query_friends(user):
 
 def validate_url(url=str()):
     try:
-        # get request for 0.8 sec
-        resp = requests.get(url, timeout=0.8)
+        resp = requests.get(url)
         if(resp.status_code < 400):
             return True
-
     except requests.exceptions.MissingSchema:
-        # the url is not valid --> regex
+        # the uxrl is not valid --> regex
         return False
-    except requests.exceptions.ReadTimeout:
-        # time-out: too long to responses
-        return False
-    except:
-        pass
+
     return False
 
 def new_friend(request, username=None):
@@ -75,7 +69,7 @@ def new_friend(request, username=None):
             # if true, then we won't make it.
 
             # get friendship that has relation with user and the friend
-            get_friendship = Friendship.objects.filter(user=user, friend=friend)
+            # get_friendship = Friendship.objects.filter(user=user, friend=friend)
 
             Friendship(user=user, friend=friend).save()
 

@@ -25,10 +25,10 @@ class StatusComment:
         self.comment = comment
     
     def __str__(self):
-        return "%s: %s" % (self.status, len(self.comment))
+        return "%s: %d" % (self.status, len(self.comment))
     
     def __repr__(self):
-        return "%s: %s" % (self.status, len(self.comment))
+        return "%s: %d" % (self.status, len(self.comment))
 
 def index(request, username=None):
     """
@@ -48,20 +48,14 @@ def index(request, username=None):
 
     status_post = get_queryset(user)
     page = request.GET.get('page', 1)
-    numbers_of_status = range(len(status_post))
+    
     paginator = Paginator(status_post, 10)
 
     no_post = True
     if(len(status_post) < 11):
         no_post = False
-
-    try:
-        status_stream = paginator.page(page)
-    except PageNotAnInteger:
-        status_stream = paginator.page(1)
-    except EmptyPage:
-        status_stream = paginator.page(paginator.num_pages)
-
+    
+    status_stream = paginator.page(page)
 
     response['no_post'] = no_post
     response['status_stream'] = status_stream
@@ -165,6 +159,3 @@ def comment_status(request, username=None, status_id=None):
 
     else:
         return HttpResponseRedirect('/%s/timeline/' % (username))
-    
-
-    

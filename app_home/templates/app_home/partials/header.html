@@ -2,8 +2,12 @@
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
       <div class="navbar-brand">
-        <img class="logo" src="https://cdn1.iconfinder.com/data/icons/web-3/512/link-128.png">
-        Ling-In
+        <div class="flex-item">
+          <a href="/">
+            <img class="logo" src="https://cdn1.iconfinder.com/data/icons/web-3/512/link-128.png">
+            
+          </a>
+        </div>
       </div>
       <div id="sidenav" class="sidenav">
           <a href="{% url 'app_dashboard:stats' user.username %}">Dashboard</a>

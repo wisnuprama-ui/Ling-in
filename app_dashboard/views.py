@@ -26,8 +26,8 @@ def index(request, username=None):
     friendship = model_friend.objects.filter(user=user).order_by('-created_at')
     jumlah_teman = friendship.count()
 
-    if(jumlah_teman > 5):
-        latest_friends = [friendship[i].friend for i in range(5)]
+    if(jumlah_teman > 2):
+        latest_friends = [friendship[i].friend for i in range(2)]
     elif(jumlah_teman > 0):
         latest_friends = [f.friend for f in friendship]
     else:

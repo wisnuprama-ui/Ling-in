@@ -185,7 +185,7 @@ class AppFriendFunctional(TestCase):
             # Opening the link we want to test
             selenium.get('http://127.0.0.1:8000/%s/friends/' % (self.username))
             isi_nama = 'namaku ada lima'
-            isi_url = 'https://www.google.com'
+            isi_url = 'www.google.com'
 
             name = selenium.find_element_by_id('input-form-name')
             url = selenium.find_element_by_id('input-form-url')

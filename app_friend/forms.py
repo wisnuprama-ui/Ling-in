@@ -30,5 +30,6 @@ class FriendForm(forms.Form):
 
     url = forms.URLField(label='URL',required=True,
                          widget=forms.URLInput(attrs=url_attrs),
-                         error_messages=error_message)
+                         error_messages=error_message,
+                         initial='https://')
     

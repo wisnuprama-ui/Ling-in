@@ -18,12 +18,15 @@
 </section>
 <section name="my-list" id="my-list">
     <div class="container">
-        <h2 class="my-list-title">My Friend</h2>
+        <h2 class="subtitle">My Friend</h2>
         <div class="flex">
             {% if friends %}
                 {% for data in friends %}
                     <div class="flex-item">
                         <div class="to-do-list">
+                            <div>
+                                <img class="profile-friends" src="{% static 'img/profile_pic.svg' %}">
+                            </div>
                             <div class="to-do-list-title">
                                 {{data.name}}
                             </div>

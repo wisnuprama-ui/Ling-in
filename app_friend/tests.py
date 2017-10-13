@@ -197,6 +197,7 @@ class AppFriendFunctional(TestCase):
             submit.send_keys(Keys.RETURN)
 
             # check the returned result
+            selenium.get('http://127.0.0.1:8000/%s/friends/' % (self.username))
             self.assertIn(isi_nama, selenium.page_source)
             self.assertIn(isi_url, selenium.page_source)
 

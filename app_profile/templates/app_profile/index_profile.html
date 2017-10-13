@@ -27,6 +27,7 @@
                             <br>
 							<br>
                             <h2><b>{{ user.first_name }} {{ user.middle_name }} {{ user.last_name }}</b></h2>
+                            <a href="/app_profile/profile_edit"></a><i class="fa fa-cog" aria-hidden="true"></i>
                             <br>
 							<br>
                             <div class="flex-item">
@@ -55,81 +56,20 @@
                             	</div>
                             	<div class="col-sm-6">
                             		{% for ii in user_expertise %}
-									<p>{{ ii }}</p>
+									<span class="badge" >{{ ii }}</span>
 									{% endfor %}
                             	</div>
                             	</div>                    
                         	</div>
                     	</div>
+                    	<br>
+                    	<br>
                     <h3>Description</h3><p>{{ user.description }}</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
-
-
-
-
-
-
-
-
-
-
-<!-- 	<body>
-<br>
-<br>
-<br>
-<br>
-	<h1>Profile</h1>
-<br>
-<br>
-<br>
-	<center>
-	{% if user.photo %}
-    <img id="img" src="{{ user.photo.url }}">
-    {% else %}
-    <img class="img" src="{% static 'img/profile_pic.svg' %}">
-    {% endif %}
-    </center>
-<br>
-<br>
-	<h2 >{{ user.first_name }} {{ user.middle_name }} {{ user.last_name }}</h2>
-<br>
-<br>
-<table>
-<tr>
-	<td>Birthday</td>
-	<td>{{ user.birth_date }}</td>
-</tr>
-<tr>
-	<td >Gender</td>
-	<td>{{ user.gender }}</td>
-</tr>
-<tr>
-	<td>Expertise</td>
-	<td"left">
-		<ul>
-			{% for ii in user.expertise %}
-				<p>{{ ii }}</p>
-			{% endfor %}
-		</ul>
-	</td>
-	
-</tr>
-<tr>
-	<td>Description</td>
-	<td>{{ user.description }}</td>
-</tr>
-<tr>
-	<td>Email</td>
-	<td>{{ user.email }}</td>
-</tr>
-</table>
-</body>
-</html> -->
 
 {% endblock %}
 

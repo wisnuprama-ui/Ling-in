@@ -5,7 +5,7 @@ from django.utils import timezone
 from django.http import HttpRequest
 from .models import Friend, Friendship
 from .forms import FriendForm
-from .views import index,get_query_friends,new_friend
+from .views import index,get_query_friends,new_friend, validate_url, delete_friend
 import app_profile.models as app_profile_models
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -85,14 +85,13 @@ class AppFriendTest(TestCase):
         data_budi = {'name': name_budi, 'url': url_budi}
         post_data_budi = Client().post('/%s/friends/add_friend/' % (self.username), data_budi, follow=True)
 
-        print(Friend.objects.all())
         self.assertEqual(post_data_budi.status_code, 200)
 
         response = Client().get('/%s/friends/' % (self.username))
         html_response = response.content.decode('utf8')
 
-        for key,data in data_budi.items():
-            self.assertIn(data,html_response)
+        self.assertIn(name_budi, html_response)
+        self.assertIn(url_budi, html_response)
 
     def test_friend_str_message(self):
         name = 'myfriend'
@@ -113,59 +112,93 @@ class AppFriendTest(TestCase):
 
         string_exp = '%s - %s' % (user.username, friend.name)
         self.assertEqual(string_exp, friendship.__str__())
+    
+    def test_friend_validate_url(self):
+        self.assertFalse(validate_url('wkwk'))
+        self.assertFalse(validate_url('https://google.com/error'))
+        self.assertTrue(validate_url('https://google.com'))
 
-# class AppFriendFunctional(TestCase):
+    def test_friend_delete_friend(self):
+        name = 'wew'
+        url = 'https://google.com'
+        friend = Friend(name=name, url=url)
+        friend.save()
 
-#         username = 'Anonymous'
-#         user_profile = None
-#         selenium = None
+        Friendship(user=self.user_profile, friend=friend).save()
 
-#         def setUp(self):
-#             self.user_profile = app_profile_models.UserProfile(
-#                 username=self.username,
-#                 first_name=self.username,
-#                 middle_name=self.username,
-#                 last_name=self.username,
-#                 email=self.username + '@' + self.username + '.com',
-#                 birth_date=timezone.now(),
-#                 birth_place=self.username,
-#                 gender=app_profile_models.UserProfile.MALE,
-#                 description=self.username + self.username + self.username
-#             );
-#             self.user_profile.save()  # save
+        response = Client().get('/%s/friends/delete_friend/%d/' % (self.username, friend.id))
+        html_response = response.content.decode('utf-8')
+        self.assertNotIn(name, html_response)
+        self.assertNotIn(url, html_response)
+    
+    def test_friend_add_friend_if_friend_is_already_exist(self):
+        name = 'wew'
+        url = 'https://google.com'
+        friend = Friend(name=name, url=url)
+        friend.save()
 
-#             chrome_options = Options()
-#             chrome_options.add_argument('--dns-prefetch-disable')
-#             chrome_options.add_argument('--no-sandbox')
-#             chrome_options.add_argument('--headless')
-#             chrome_options.add_argument('disable-gpu')
-#             self.selenium = webdriver.Chrome('./chromedriver', chrome_options=chrome_options)
+        Friendship(user=self.user_profile, friend=friend).save()
 
-#             super(AppFriendFunctional, self).setUp()
+        data = {'name': name, 'url': url}
+        response = Client().post('/%s/friends/add_friend/' % (self.username), data)
+        
+        response = Client().get('/%s/friends/' % self.username)
+        html_response = response.content.decode('utf-8')
+        self.assertIn(name, html_response)
+        self.assertIn(url, html_response)
 
-#         def tearDown(self):
-#             self.selenium.quit()
-#             super(AppFriendFunctional, self).tearDown()
+class AppFriendFunctional(TestCase):
 
-#         def test_friend_input_status(self):
-#             selenium = self.selenium
-#             # Opening the link we want to test
-#             selenium.get('http://127.0.0.1:8000/%s/friends/' % (self.username))
-#             isi_nama = 'namaku ada lima'
-#             isi_url = 'https://www.google.com'
+        username = 'Anonymous'
+        user_profile = None
+        selenium = None
 
-#             name = selenium.find_element_by_id('input-form-name')
-#             url = selenium.find_element_by_id('input-form-url')
-#             submit = selenium.find_element_by_id('submit')
+        def setUp(self):
+            self.user_profile = app_profile_models.UserProfile(
+                username=self.username,
+                first_name=self.username,
+                middle_name=self.username,
+                last_name=self.username,
+                email=self.username + '@' + self.username + '.com',
+                birth_date=timezone.now(),
+                birth_place=self.username,
+                gender=app_profile_models.UserProfile.MALE,
+                description=self.username + self.username + self.username
+            );
+            self.user_profile.save()  # save
 
-#             name.send_keys(isi_nama)
-#             url.send_keys(isi_url)
-#             # submit
-#             submit.send_keys(Keys.RETURN)
+            chrome_options = Options()
+            chrome_options.add_argument('--dns-prefetch-disable')
+            chrome_options.add_argument('--no-sandbox')
+            chrome_options.add_argument('--headless')
+            chrome_options.add_argument('disable-gpu')
+            self.selenium = webdriver.Chrome('./chromedriver', chrome_options=chrome_options)
 
-#             # check the returned result
-#             self.assertIn(isi_nama, selenium.page_source)
-#             self.assertIn(isi_url, selenium.page_source)
+            super(AppFriendFunctional, self).setUp()
+
+        def tearDown(self):
+            self.selenium.quit()
+            super(AppFriendFunctional, self).tearDown()
+
+        def test_friend_input_status(self):
+            selenium = self.selenium
+            # Opening the link we want to test
+            selenium.get('http://127.0.0.1:8000/%s/friends/' % (self.username))
+            isi_nama = 'namaku ada lima'
+            isi_url = 'https://www.google.com'
+
+            name = selenium.find_element_by_id('input-form-name')
+            url = selenium.find_element_by_id('input-form-url')
+            submit = selenium.find_element_by_id('submit')
+
+            name.send_keys(isi_nama)
+            url.send_keys(isi_url)
+            # submit
+            submit.send_keys(Keys.RETURN)
+
+            # check the returned result
+            self.assertIn(isi_nama, selenium.page_source)
+            self.assertIn(isi_url, selenium.page_source)
 
 #             # def test_delete_todo(self):
 #             #     selenium =./ self.selenium

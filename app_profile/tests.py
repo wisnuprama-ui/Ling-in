@@ -7,7 +7,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import ErrorInResponseException
 from .views import index, edit
-from .models import UserProfile,Expertise,ExpertIn
+from .models import UserProfile,Expertise,ExpertIn, user_directory_img_path
 
 class ProfileUnitTest(TestCase):
 
@@ -61,9 +61,31 @@ class ProfileUnitTest(TestCase):
 
     def test_profile_using_index_func(self):
         found = resolve('/%s/' % self.username)
-        self.assertTrue(found.func, index)
+        self.assertEqual(found.func, index)
 
+    def test_profile_user_expertise_in_profile_page(self):
+        exp = Expertise(expertise='ngoding')
+        exp.save()
 
-    #def test_profile_edited_using_edit_func(self):
+        exp_in = ExpertIn(user=self.user_profile, expertise=exp)
+        exp_in.save()
 
+        found = resolve('/%s/' % self.username)
+        self.assertEqual(found.func, index)
+
+        response = Client().get('/%s/' % self.username)
+        html_resp = response.content.decode('utf-8')
+        self.assertIn(exp.expertise, html_resp)
+    
+    def test_profile_check_dir_image_profile(self):
+        test = 'image/user/%s/profile/%s' % (self.username, 'ohyeah')
+        res = user_directory_img_path(self.user_profile, 'ohyeah')
+        wa = user_directory_img_path(self.user_profile, 'noimage')
+
+        self.assertEqual(test, res)
+        self.assertNotEqual(test, wa)
+
+    def test_profile_edited_using_edit_func(self):
+        # temporary. find the solution when create edit profile
+        edit(HttpRequest(), username=self.username)
 

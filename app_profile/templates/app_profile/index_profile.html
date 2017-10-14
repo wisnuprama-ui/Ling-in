@@ -33,38 +33,38 @@
                             <div class="flex-item">
                             <div class="row">
                             	<div class="profile">
-                            	<div class="col-sm-6">
-                            		<p style="text-align:right"><b>Birthday</b></p>
-                            	</div>
-                            	<div class="col-sm-6">
-                            		<p>{{ user.birth_date }}</p>	
-                            	</div>
-                            	<div class="col-sm-6">
-                            		<p style="text-align:right"><b>Gender</b></p>
-                            	</div>
-                            	<div class="col-sm-6">
-                            		<p>{{ user.gender }}</p>	
-                            	</div>
-                            	<div class="col-sm-6">
-                            		<p style="text-align:right"><b>Email</b></p>
-                            	</div>
-                            	<div class="col-sm-6">
-                            		<p>{{ user.email }}</p>	
-                            	</div>
-                                <div class="col-sm-6">
-                            		<p style="text-align:right"><b>Expertise</b></p>
-                            	</div>
-                            	<div class="col-sm-6">
-                            		{% for ii in user_expertise %}
+									<div class="col-sm-6">
+										<p class="title"><b>Birthday</b></p>
+									</div>
+									<div class="col-sm-6">
+										<p class="content">{{ user.birth_date }}</p>	
+									</div>
+									<div class="col-sm-6">
+										<p class="title"><b>Gender</b></p>
+									</div>
+									<div class="col-sm-6">
+										<p class="content">{{ user.gender }}</p>	
+									</div>
+									<div class="col-sm-6">
+										<p class="title"><b>Email</b></p>
+									</div>
+									<div class="col-sm-6">
+										<p class="content">{{ user.email }}</p>	
+									</div>
+									<div class="col-sm-6">
+										<p class="title"><b>Expertise</b></p>
+									</div>
+									<div class="col-sm-6">
+									{% for ii in user_expertise %}
 									<span class="badge" >{{ ii }}</span>
 									{% endfor %}
-                            	</div>
+									</div>
                             	</div>                    
                         	</div>
-                    	</div>
+						</div>
                     	<br>
                     	<br>
-                    <h3>Description</h3><p>{{ user.description }}</p>
+                    <h3>Description</h3><p class="desc">{{ user.description }}</p>
                 </div>
             </div>
         </div>

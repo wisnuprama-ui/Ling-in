@@ -40,11 +40,6 @@ td{
 
 }
 
-p{
-	font-family: 
-
-}
-
 .profile {
 	/*display:flex;*/
 	min-width: 50%;
@@ -53,14 +48,16 @@ p{
 	align-content: center;
 }
 
-.profile p{
-	margin-top: 5px;
-	margin-bottom: 5px;
+.profile .content{
+	/* margin-top: 5px; */
+	/* margin-bottom: 5px; */
+	text-align: left;
 }
 
 
-.profile p b {
+.profile .title {
 	margin-right:50px;
+	text-align:right;
 }
 
 .badge{
@@ -68,3 +65,21 @@ p{
 	border-spacing: 30px;
 }
 
+@media (max-width:768px) {
+	.flex-item {
+		align-content: center;
+	}
+
+	.desc {
+		text-align: justify;
+	}
+
+	.profile .title {
+		margin-right: 0;
+		text-align: center;
+	}
+
+	.profile .content {
+		text-align: center
+	}
+}
